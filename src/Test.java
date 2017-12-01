@@ -2,11 +2,13 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableArray;
 import javafx.collections.ObservableList;
 import javafx.scene.Node;
+import javafx.scene.control.Label;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.Line;
 import javafx.scene.shape.Polyline;
+import javafx.scene.text.Font;
 
 import java.awt.geom.Point2D;
 import java.util.ArrayList;
@@ -35,7 +37,7 @@ public class Test {
 
     }
 
-
+/*
     public  void addPoint() {
         System.out.println("a1  " + data.size());
         System.out.println("a2  " + point.size());
@@ -51,7 +53,8 @@ public class Test {
 
             }
         }
-    }
+    }*/
+
     public void addNeighbor (City p , City c  )
     {
         p.getNeighbor().add(c);
@@ -72,7 +75,6 @@ public class Test {
 
     public Pane getPaneLine()
     {
-      //  pL.getChildren().add(new  Line (10,10 ,100,100 ) ) ;
         System.out.println(point);
         pL.getChildren().addAll(point);
         return  pL;
@@ -85,8 +87,16 @@ class circlePane extends Pane {
 
     public  void setPane (ArrayList<City> cl  )
     {
+        Label l ;
         for (City c  : cl ) {
             this.getChildren().add(new Circle(c.getX(), c.getY(), 10));
+
+            l=new Label(c.name) ;
+            l.setLayoutX(c.getX());
+            l.setLayoutY(c.getY() );
+            l.setTextFill(Color.RED);
+           l.setFont(Font.font(25));
+            this.getChildren().add(l);
 
         }
     }

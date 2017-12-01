@@ -140,6 +140,7 @@ public class Main extends Application {
             if (e.getButton() == MouseButton.SECONDARY)
             {
                 cp.setPane(t.getData());
+                if (t.getData().size() > 1 )
                 cp.addLine(t.getCity(com.getValue()), t.getCity(com2.getValue()));
                // t.addPoint(); //imp.
             }
