@@ -33,16 +33,6 @@ public class Main extends Application {
         VBox p =  new VBox ();
         p.setAlignment(Pos.CENTER);
 
-       /* t.addCity( "Sadat" ,62 ,405 );
-        t.addCity( "Ashmon" ,460 ,457 );
-        t.addCity( "Bagor" ,509 ,327 );
-        t.addCity( "Sers" ,405 ,304 );
-        t.addCity( "Menouf" ,419 ,270 );//
-        t.addCity( "Shohada" ,400 ,150 );
-        t.addCity( "Tala" ,435 ,55 );
-        t.addCity( "Shebin" ,200,480 );
-        t.addCity( "quensa" ,600,215 );
-        t.addCity( "Berkat" ,560,120);*/
 
       /*  t.addNeighbor(t.getCity("Sadat") ,t.getCity("Ashmon") );
         t.addNeighbor(t.getCity("Sadat") ,t.getCity("Menouf") );
@@ -76,12 +66,7 @@ public class Main extends Application {
         System.out.println("sdsa" + t.cityNames);
         ObservableList<String> cname = FXCollections.observableArrayList(t.cityNames) ;
 
-
-
         ComboBox<String> com  = new ComboBox<String>(cname) ;
-        // com.getItems().addAll(cityNames.toArray()) ;
-
-
         ComboBox<String> com2  = new ComboBox<>(cname) ;
 
         //feature not select same city
@@ -95,8 +80,11 @@ public class Main extends Application {
 
         Button addR = new Button("addRelation") ;
         addR.setOnAction(e->{
-            if (com.getValue() != "" && com2.getValue() != "")
-                t.addNeighbor(t.getCity(com.getValue()) , t.getCity(com2.getValue()));
+            if (com.getValue() != "" && com2.getValue() != "") {
+                t.addNeighbor(t.getCity(com.getValue()), t.getCity(com2.getValue()));
+                t.addNeighbor(t.getCity(com2.getValue()), t.getCity(com.getValue()) );
+
+            }
             t.getCity(com.getValue()).dispalyN();
         });
 
