@@ -6,8 +6,10 @@ import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonBase;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
+import javafx.scene.input.MouseButton;
 import javafx.scene.layout.Border;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
@@ -30,7 +32,8 @@ public class Main extends Application {
     @Override
     public void start(Stage primaryStage) {
 
-        VBox p =  new VBox ();
+        VBox p =  new VBox (20);
+        p.setPadding(new Insets(15));
         p.setAlignment(Pos.CENTER);
 
 
@@ -79,20 +82,12 @@ public class Main extends Application {
 */
 
         Button addR = new Button("addRelation") ;
-        addR.setOnAction(e->{
-            if (com.getValue() != "" && com2.getValue() != "") {
-                t.addNeighbor(t.getCity(com.getValue()), t.getCity(com2.getValue()));
-                t.addNeighbor(t.getCity(com2.getValue()), t.getCity(com.getValue()) );
 
-            }
-            t.getCity(com.getValue()).dispalyN();
-        });
 
         Button add = new Button("addCity") ;
         add.setOnAction(e-> {
             try {
                 String name = tname.getText();
-                //cityNames.add(name) ;
                 int x = Integer.parseInt(tx.getText());
                 int y = Integer.parseInt(ty.getText());
                 t.addCity(name , x , y );
@@ -106,9 +101,11 @@ public class Main extends Application {
         });
 
         HBox addC = new HBox(10);
+        addC.setAlignment(Pos.CENTER);
         addC.getChildren().addAll(tname , tx , ty , add) ;
 
         HBox haddR = new HBox(10);
+        haddR.setAlignment(Pos.CENTER);
         haddR.getChildren().addAll(com , com2 ,addR) ;
         addPane.getChildren().addAll(addC , haddR) ;
 
@@ -118,16 +115,35 @@ public class Main extends Application {
             System.out.println(e.getX() +"   " +  e.getY());
         });
 
-        circlePane cp = new circlePane( t.getData() ) ;
+        circlePane cp = new circlePane() ;
         Pane pDrwa = new Pane ();
         p.setStyle("-fx-background-color:yellow");
 
-        t.addPoint(); //imp.
+
+        addR.setOnAction(e->{
+            if (com.getValue() != "" && com2.getValue() != "") {
+                t.addNeighbor(t.getCity(com.getValue()), t.getCity(com2.getValue()));
+                t.addNeighbor(t.getCity(com2.getValue()), t.getCity(com.getValue()) );
+                cp.addLine(t.getCity(com.getValue()), t.getCity(com2.getValue()));
+
+            }
+            t.getCity(com.getValue()).dispalyN();
+        });
 
         pDrwa.getChildren().addAll(cp , t.getPaneLine()) ;
         //System.out.println(t.getPoly());
 
         p.getChildren().addAll( addPane , pDrwa ) ;
+
+        //handle draw action
+        p.setOnMousePressed(e->{
+            if (e.getButton() == MouseButton.SECONDARY)
+            {
+                cp.setPane(t.getData());
+                cp.addLine(t.getCity(com.getValue()), t.getCity(com2.getValue()));
+               // t.addPoint(); //imp.
+            }
+        });
 
         Scene s = new Scene(p ,700, 600) ;
         primaryStage.setScene(s);

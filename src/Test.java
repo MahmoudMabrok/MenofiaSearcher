@@ -38,7 +38,7 @@ public class Test {
 
     public  void addPoint() {
         System.out.println("a1  " + data.size());
-        System.out.println("a2  " + point);
+        System.out.println("a2  " + point.size());
         for (City c :data
              ) {
           //  point.add(Double.valueOf(c.getX())) ;
@@ -47,7 +47,7 @@ public class Test {
                  ) {
                // point.add(Double.valueOf(c2.getX())) ;
                // point.add(Double.valueOf(c2.getY())) ;
-                point.add(new Line(c.getX(),c.getY() ,c2.getX() , c2.getY())) ;
+                pL.getChildren().add(new Line(c.getX(),c.getY() ,c2.getX() , c2.getY())) ;
 
             }
         }
@@ -80,14 +80,20 @@ public class Test {
 }
 
 class circlePane extends Pane {
+    public circlePane() {
+    }
 
-    public circlePane(ArrayList<City> cl  ) {
-
+    public  void setPane (ArrayList<City> cl  )
+    {
         for (City c  : cl ) {
             this.getChildren().add(new Circle(c.getX(), c.getY(), 10));
 
         }
-      //  getChildren().add(new Line( ,,,))
+    }
+    public void addLine (City c , City c2)
+    {
+        this.getChildren().add(new Line(c.getX(),c.getY() ,c2.getX() , c2.getY())) ;
+
     }
 }
 
