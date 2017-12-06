@@ -19,9 +19,7 @@ public class City {
     }
 
     private int x ,y ;
-   /* private  HashMap <City ,Integer > neighbor  = new HashMap<>();
-    private  HashMap <City ,Integer > neighbor  = new HashMap<>();
-*/
+
    private ArrayList <City> neighbor = new ArrayList<>() ;
    private ArrayList <Integer> distance  = new ArrayList<>() ;
    private ArrayList <Integer> realistic   = new ArrayList<>() ;
@@ -60,9 +58,10 @@ public class City {
 
     public void dispalyN ()
     {
+
         System.out.println(name + " --> ");
         for (City e:neighbor) {
-            System.out.println("\t\t"+ e.name);
+            System.out.println("\t\t"+ e.name + "  dis is  " );
         }
     }
 }

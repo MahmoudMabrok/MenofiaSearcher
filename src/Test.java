@@ -17,14 +17,15 @@ public class Test {
     public  ArrayList<String> cityNames = new ArrayList<>() ;
 
   private    ArrayList<City> data  = new ArrayList<>() ;
-  private    ArrayList<Circle> points = new ArrayList<>() ;
-      ArrayList<String> status = new ArrayList<>() ;
-   /* Polyline pl =new Polyline();
+  /*private    ArrayList<Circle> points = new ArrayList<>() ;*/
+
+  /* Polyline pl =new Polyline();
     ObservableList<Double> point = pl.getPoints() ;
 */
 
    Pane pL = new Pane() ;
-   ObservableList<Node> point = FXCollections.observableArrayList(pL.getChildren());
+   ObservableList<Node> point = FXCollections.
+           observableArrayList(pL.getChildren());
 
 
     public void addCity(String name , int x , int y  )

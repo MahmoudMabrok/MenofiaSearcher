@@ -3,58 +3,37 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
-import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ButtonBase;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseButton;
-import javafx.scene.layout.Border;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
-import javafx.scene.shape.Circle;
-import javafx.scene.shape.Polyline;
 import javafx.stage.Stage;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.InputMismatchException;
 
 public class Main extends Application {
-
     Test t = new Test() ;
-
+    BFS b = new BFS() ;
+    ArrayList <String> aloNames = new ArrayList<>() ;
     public static void main(String[] args) {
         launch(args);
     }
-
     @Override
     public void start(Stage primaryStage) {
-
+        //add avaible alo
+        aloNames.add( "BFS") ;
+        //root pane
         VBox p =  new VBox (20);
         p.setPadding(new Insets(15));
         p.setAlignment(Pos.CENTER);
 
-
-      /*  t.addNeighbor(t.getCity("Sadat") ,t.getCity("Ashmon") );
-        t.addNeighbor(t.getCity("Sadat") ,t.getCity("Menouf") );
-        t.addNeighbor(t.getCity("Sadat") ,t.getCity("Menouf") );
-        t.addNeighbor(t.getCity("Sadat") ,t.getCity("Menouf") );
-        t.addNeighbor(t.getCity("Sadat") ,t.getCity("Menouf") );
-        t.addNeighbor(t.getCity("Sadat") ,t.getCity("Menouf") );
-        t.addNeighbor(t.getCity("Sadat") ,t.getCity("Menouf") );
-        t.addNeighbor(t.getCity("Sadat") ,t.getCity("Menouf") );
-        t.addNeighbor(t.getCity("Sadat") ,t.getCity("Menouf") );
-        t.addNeighbor(t.getCity("Sadat") ,t.getCity("Menouf") );
-        t.addNeighbor(t.getCity("Sadat") ,t.getCity("Menouf") );
-        t.addNeighbor(t.getCity("Sadat") ,t.getCity("Menouf") );
-        t.addNeighbor(t.getCity("Sadat") ,t.getCity("Menouf") );
-        t.addNeighbor(t.getCity("Sadat") ,t.getCity("Menouf") );
-        t.addNeighbor(t.getCity("Sadat") ,t.getCity("Menouf") );
-        t.addNeighbor(t.getCity("Sadat") ,t.getCity("Menouf") );
-
-*/
       //addPane
       VBox addPane = new VBox(15) ;
         TextField tname = new TextField () ;
@@ -67,10 +46,15 @@ public class Main extends Application {
 
         //neibour
         System.out.println("sdsa" + t.cityNames);
-        ObservableList<String> cname = FXCollections.observableArrayList(t.cityNames) ;
+        ObservableList<String> cname = FXCollections.
+                observableArrayList(t.cityNames) ;
+
+        ObservableList<String> obAlnames = FXCollections.
+                observableArrayList(aloNames) ;
 
         ComboBox<String> com  = new ComboBox<String>(cname) ;
         ComboBox<String> com2  = new ComboBox<>(cname) ;
+        ComboBox<String> comAlo  = new ComboBox<String>(obAlnames) ;
 
         //feature not select same city
 /*
@@ -81,24 +65,46 @@ public class Main extends Application {
         });
 */
 
+
         Button addR = new Button("addRelation") ;
-
-
+        Button startAlo = new Button("yala nabhas ") ;
         Button add = new Button("addCity") ;
         add.setOnAction(e-> {
             try {
                 String name = tname.getText();
-                int x = Integer.parseInt(tx.getText());
-                int y = Integer.parseInt(ty.getText());
+                int x = Integer.parseInt(tx.getText().trim());
+                int y = Integer.parseInt(ty.getText().trim());
                 t.addCity(name , x , y );
                 com.getItems().setAll(t.cityNames) ;
             }catch (InputMismatchException i )
             {
+
             }
 
+        });
+
+        startAlo.setOnAction(e->{
+                String c1 = com.getValue() ;
+                String c2 = com2.getValue() ;
+                City  cStart = t.getCity(c1) ;
+                City  cEnd = t.getCity(c2) ;
+                if (comAlo.getValue() == "BFS")
+                {
+                    System.out.println("BFS");
+                    ArrayList<City> temp = b.bfsStart(t.getData() , cStart ,cEnd) ;
+                    System.out.println(temp );
+                    if ( temp  != null)
+                    {
+                        System.out.println("inside");
+                        for (City c :temp  ) {
+                            System.out.println(c.name);
+                        }
+                    }
+                }
 
 
         });
+
 
         HBox addC = new HBox(10);
         addC.setAlignment(Pos.CENTER);
@@ -106,9 +112,15 @@ public class Main extends Application {
 
         HBox haddR = new HBox(10);
         haddR.setAlignment(Pos.CENTER);
-        haddR.getChildren().addAll(com , com2 ,addR) ;
-        addPane.getChildren().addAll(addC , haddR) ;
+        haddR.getChildren().addAll(com , com2 ,addR  ) ;
 
+        HBox selectAlgo  = new HBox(10);
+        selectAlgo.setAlignment(Pos.CENTER);
+        selectAlgo.getChildren().addAll(comAlo ,startAlo) ;
+
+
+        //global pane
+        addPane.getChildren().addAll(addC , haddR ,selectAlgo ) ;
 
         p.setOnMousePressed(e->
         {
@@ -119,20 +131,15 @@ public class Main extends Application {
         Pane pDrwa = new Pane ();
         p.setStyle("-fx-background-color:yellow");
 
-
         addR.setOnAction(e->{
             if (com.getValue() != "" && com2.getValue() != "") {
                 t.addNeighbor(t.getCity(com.getValue()), t.getCity(com2.getValue()));
                 t.addNeighbor(t.getCity(com2.getValue()), t.getCity(com.getValue()) );
                 cp.addLine(t.getCity(com.getValue()), t.getCity(com2.getValue()));
-
             }
             t.getCity(com.getValue()).dispalyN();
         });
-
         pDrwa.getChildren().addAll(cp , t.getPaneLine()) ;
-        //System.out.println(t.getPoly());
-
         p.getChildren().addAll( addPane , pDrwa ) ;
 
         //handle draw action
@@ -145,13 +152,8 @@ public class Main extends Application {
                // t.addPoint(); //imp.
             }
         });
-
         Scene s = new Scene(p ,700, 600) ;
         primaryStage.setScene(s);
-         primaryStage.show();
-
+        primaryStage.show();
     }
-
-
-
 }
