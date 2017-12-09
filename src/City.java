@@ -22,7 +22,7 @@ public class City {
 
    private ArrayList <City> neighbor = new ArrayList<>() ;
    private ArrayList <Integer> distance  = new ArrayList<>() ;
-   private ArrayList <Integer> realistic   = new ArrayList<>() ;
+   private ArrayList <Double> realistic   = new ArrayList<>() ;
 
     public City(String name) {
         this.name = name;
@@ -36,6 +36,9 @@ public class City {
 
     }
 
+    public ArrayList<Double > getRealistic() {
+        return realistic;
+    }
 
     public void setName(String name) {
         this.name = name;

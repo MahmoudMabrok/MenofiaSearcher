@@ -27,6 +27,7 @@ public class Main2 extends Application {
     Test2 t = new Test2() ;
     ArrayList <String> aloNames = new ArrayList<>() ;
     Stage newOne = new Stage() ;
+    circlePane cp = new circlePane() ;
     public static void main(String[] args) {
         launch(args);
     }
@@ -36,7 +37,7 @@ public class Main2 extends Application {
         String[] algonames = new String[]{ "", "BFS" , "DFS" , "Greedy", "A*"} ;
 
         //  aloNames.add( algonames ) ;
-        
+
 
         //root pane
         VBox p =  new VBox (20);

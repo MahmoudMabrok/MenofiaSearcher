@@ -17,15 +17,7 @@ public class Test {
     public  ArrayList<String> cityNames = new ArrayList<>() ;
 
   private    ArrayList<City> data  = new ArrayList<>() ;
-  /*private    ArrayList<Circle> points = new ArrayList<>() ;*/
 
-  /* Polyline pl =new Polyline();
-    ObservableList<Double> point = pl.getPoints() ;
-*/
-
-   Pane pL = new Pane() ;
-   ObservableList<Node> point = FXCollections.
-           observableArrayList(pL.getChildren());
 
 
     public void addCity(String name , int x , int y  )
@@ -33,32 +25,21 @@ public class Test {
 
         data.add(new City( x , y  , name ));
         cityNames.add(name) ;
-       // point.add(Double.valueOf(x)) ;
-       // point.add(Double.valueOf(y)) ;
 
     }
 
-/*
-    public  void addPoint() {
-        System.out.println("a1  " + data.size());
-        System.out.println("a2  " + point.size());
-        for (City c :data
-             ) {
-          //  point.add(Double.valueOf(c.getX())) ;
-          //  point.add(Double.valueOf(c.getY())) ;
-            for (City c2 :c.getNeighbor()
-                 ) {
-               // point.add(Double.valueOf(c2.getX())) ;
-               // point.add(Double.valueOf(c2.getY())) ;
-                pL.getChildren().add(new Line(c.getX(),c.getY() ,c2.getX() , c2.getY())) ;
-
-            }
-        }
-    }*/
-
-    public void addNeighbor (City p , City c  )
+    public void addNeighbor (City p , City c   , double realistic  )
     {
         p.getNeighbor().add(c);
+        p.getRealistic().add(realistic) ;
+
+    }
+    public void addNeighborPrepared (City p , City c   , double realistic  )
+    {
+        p.getNeighbor().add(c);
+        c.getNeighbor().add(p) ;
+        p.getRealistic().add(realistic) ;
+        c.getRealistic().add(realistic) ;
 
     }
     public City getCity (String name ){
@@ -69,17 +50,53 @@ public class Test {
         }
         return  null ;
     }
+    public void getPreparedData (){
+
+        City Sadat = new City( 32,405,"Sadat");
+        City Ashmoun = new City(460,457,"Ashmoun");
+        City Bajour = new City(509,327,"Bajour");
+        City Menouf = new City(419,285,"Menouf");
+        City Sers = new City(405,304,"Sers");
+        City Shohada = new City(400,150,"Shohada");
+        City Tala = new City(435,55,"Tala");
+        City Shebin = new City(480,200,"Shebin");
+        City Quesna = new City(600,315,"Quesna");
+        City Berkat_elsan3 = new City(560,120,"Berkat elsan3");
+
+        addNeighborPrepared( Sadat,Ashmoun ,  75) ;
+        addNeighborPrepared( Sadat,Menouf ,  57.7) ;
+        addNeighborPrepared( Menouf,Sers ,  7.2) ;
+        addNeighborPrepared( Menouf,Shohada ,  22.8) ;
+        addNeighborPrepared( Sers,Bajour ,  8.3) ;
+        addNeighborPrepared( Menouf,Shebin ,  17.9) ;
+        addNeighborPrepared( Tala,Shebin ,  16.3) ;
+        addNeighborPrepared( Shebin,Quesna ,  18.3) ;
+        addNeighborPrepared( Shebin,Berkat_elsan3 ,  14.3) ;
+        addNeighborPrepared( Quesna,Berkat_elsan3 ,  17.1) ;
+
+        data.add(Sadat) ;
+        data.add(Menouf) ;
+        data.add(Shebin) ;
+        data.add(Shohada) ;
+        data.add(Sers) ;
+        data.add(Ashmoun) ;
+        data.add(Tala) ;
+        data.add(Quesna) ;
+        data.add(Bajour) ;
+        data.add(Berkat_elsan3) ;
+
+        for (City c  : data ) {
+            cityNames.add(c.name);
+        }
+
+        //return data ;
+
+    }
 
     public ArrayList<City> getData() {
         return data;
     }
 
-    public Pane getPaneLine()
-    {
-        System.out.println(point);
-        pL.getChildren().addAll(point);
-        return  pL;
-    }
 }
 
 class circlePane extends Pane {
@@ -90,14 +107,7 @@ class circlePane extends Pane {
     public  void setPane (ArrayList<City> cl  )
     {
         Label l ;
-      //  Polyline p = new Polyline() ;
-       // ObservableList<Double> points = p.getPoints() ;
-       // this.getChildren().add(p);
 
-        /*
-        points.add(Double.valueOf(c.getX())) ;
-        points.add(Double.valueOf(c.getY())) ;
-        */
         for (City c  : cl ) {
             this.getChildren().add(new Circle(c.getX(), c.getY(), 10));
 
@@ -123,12 +133,7 @@ class circlePane extends Pane {
         }
 
     }
-   /* public void addLine (City c , City c2)
-    {
-        this.getChildren().add(new Line(c.getX(),c.getY()
-                                        ,c2.getX() , c2.getY())) ;
 
-    }*/
     public Pane getPane()
     {
         return this ;
