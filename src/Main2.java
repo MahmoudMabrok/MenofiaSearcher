@@ -1,4 +1,3 @@
-
 import javafx.animation.PathTransition;
 import javafx.application.Application;
 import javafx.collections.FXCollections;
@@ -6,10 +5,8 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
-import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import javafx.scene.control.ButtonBase;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseButton;
@@ -24,11 +21,10 @@ import javafx.stage.Stage;
 import javafx.util.Duration;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.InputMismatchException;
 
-public class Main extends Application {
-    Test t = new Test() ;
+public class Main2 extends Application {
+    Test2 t = new Test2() ;
     ArrayList <String> aloNames = new ArrayList<>() ;
     Stage newOne = new Stage() ;
     public static void main(String[] args) {
@@ -40,7 +36,7 @@ public class Main extends Application {
         String[] algonames = new String[]{ "", "BFS" , "DFS" , "Greedy", "A*"} ;
 
         //  aloNames.add( algonames ) ;
-        circlePane cp = new circlePane() ;
+        
 
         //root pane
         VBox p =  new VBox (20);
@@ -85,25 +81,12 @@ public class Main extends Application {
 
             }
 
-            /* cname.clear();
-           cname.addAll(t.cityNames) ;
-       */
-
-
         });
-
-
 
         drawPath.setOnAction((ActionEvent e) ->{
 
-//            String c1 = com.getValue() ;
-//            String c2 = com2.getValue() ;
-//            String c3 = comAlo.getValue() ;
-//            City  cStart = t.getCity(c1) ;
-//            City  cEnd = t.getCity(c2) ;
-            ArrayList<City> ll  = t.getData() ;
-            String c1 = "a3" ;
-            String c2 = "a5" ;
+            String c1 = com.getValue() ;
+            String c2 = com2.getValue() ;
             String c3 = comAlo.getValue() ;
             City  cStart = t.getCity(c1) ;
             City  cEnd = t.getCity(c2) ;
@@ -131,10 +114,8 @@ public class Main extends Application {
             }
             else if (c3 == "DFS")
             {
-                DepthFirst b = new DepthFirst();
-                b.DFS_search(cStart,cEnd);
-                visted = getPath(b.visited) ;
-                r.getChildren().add(visted );
+
+
             }
             else if (c3 == "Greedy")
             {
@@ -148,9 +129,9 @@ public class Main extends Application {
             }
 
 
-            r.setOnMousePressed((MouseEvent h) ->{
-                r.getChildren().remove(1);
-            });
+           r.setOnMousePressed((MouseEvent h) ->{
+               r.getChildren().remove(1);
+           });
 
             hroot.getChildren().add(r) ;
             newOne.setScene(new Scene(hroot));
@@ -189,12 +170,12 @@ public class Main extends Application {
 
         Scene s = new Scene(p ) ;
         //handle draw action
-        p.setOnMousePressed(e->{
+       p.setOnMousePressed(e->{
             if (e.getButton() == MouseButton.SECONDARY)
             {
-                t.getData().clear();
-                cname.clear();
-                t.cityNames.clear();
+              t.getData().clear();
+              cname.clear();
+              t.cityNames.clear();
                 System.out.println(t.getData().size());
             }
         });
@@ -214,7 +195,7 @@ public class Main extends Application {
 
 
         for (City c :data
-                ) {
+             ) {
             points.add( Double.valueOf( c.getX()) ) ;
             points.add( Double.valueOf(c.getY()) );
         }

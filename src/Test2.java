@@ -1,3 +1,5 @@
+
+
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableArray;
 import javafx.collections.ObservableList;
@@ -13,19 +15,19 @@ import javafx.scene.text.Font;
 import java.awt.geom.Point2D;
 import java.util.ArrayList;
 
-public class Test {
+public class Test2 {
     public  ArrayList<String> cityNames = new ArrayList<>() ;
 
-  private    ArrayList<City> data  = new ArrayList<>() ;
+    private    ArrayList<City> data  = new ArrayList<>() ;
   /*private    ArrayList<Circle> points = new ArrayList<>() ;*/
 
   /* Polyline pl =new Polyline();
     ObservableList<Double> point = pl.getPoints() ;
 */
 
-   Pane pL = new Pane() ;
-   ObservableList<Node> point = FXCollections.
-           observableArrayList(pL.getChildren());
+    Pane pL = new Pane() ;
+    ObservableList<Node> point = FXCollections.
+            observableArrayList(pL.getChildren());
 
 
     public void addCity(String name , int x , int y  )
@@ -33,8 +35,8 @@ public class Test {
 
         data.add(new City( x , y  , name ));
         cityNames.add(name) ;
-       // point.add(Double.valueOf(x)) ;
-       // point.add(Double.valueOf(y)) ;
+        // point.add(Double.valueOf(x)) ;
+        // point.add(Double.valueOf(y)) ;
 
     }
 
@@ -63,7 +65,7 @@ public class Test {
     }
     public City getCity (String name ){
         for (City c: data
-             ) {
+                ) {
             if (c.name == name)
                 return  c ;
         }
@@ -71,6 +73,44 @@ public class Test {
     }
 
     public ArrayList<City> getData() {
+        City c1 = new City( 30,150,"a1");
+
+        City c2 = new City(60,180,"a2");
+        City c3 = new City(10,230,"a3");
+        City c4 = new City(60,120,"a4");
+        City c5 = new City(100,140,"a5");
+        City c6 = new City(100,100,"a6");
+        City c7 = new City(130,160,"a7");
+        City c8 = new City(90,170,"a8");
+
+        c1.addNeighbor(c2);
+        c1.addNeighbor(c3);
+        c1.addNeighbor(c4);
+        c4.addNeighbor(c5);
+        c4.addNeighbor(c6);
+        c5.addNeighbor(c7);
+        c5.addNeighbor(c8);
+
+        c2.addNeighbor(c1);
+        c3.addNeighbor(c1);
+        c4.addNeighbor(c1);
+        c5.addNeighbor(c4);
+        c6.addNeighbor(c4);
+        c7.addNeighbor(c5);
+        c8.addNeighbor(c5);
+
+        data.add(c1);
+        data.add(c2);
+        data.add(c3);
+        data.add(c4);
+        data.add(c5);
+        data.add(c6);
+        data.add(c7);
+        data.add(c8);
+
+        for (City c : data ) {
+            cityNames.add(c.name) ;
+        }
         return data;
     }
 
@@ -81,58 +121,3 @@ public class Test {
         return  pL;
     }
 }
-
-class circlePane extends Pane {
-
-    public circlePane() {
-    }
-
-    public  void setPane (ArrayList<City> cl  )
-    {
-        Label l ;
-      //  Polyline p = new Polyline() ;
-       // ObservableList<Double> points = p.getPoints() ;
-       // this.getChildren().add(p);
-
-        /*
-        points.add(Double.valueOf(c.getX())) ;
-        points.add(Double.valueOf(c.getY())) ;
-        */
-        for (City c  : cl ) {
-            this.getChildren().add(new Circle(c.getX(), c.getY(), 10));
-
-            l=new Label(c.name) ;
-            l.setLayoutX(c.getX());
-            l.setLayoutY(c.getY() );
-            l.setTextFill(Color.RED);
-            l.setFont(Font.font(25));
-            this.getChildren().add(l);
-        }
-        int startx ,starty ;
-        int endx,endy ;
-        Line ln = null  ;
-        for (City c :cl){
-
-            startx = c.getX() ;
-            starty = c.getY() ;
-            for(City cn : c.getNeighbor())
-            {
-                ln = new Line( startx,starty,cn.getX(),cn.getY()) ;
-                getChildren().add(ln) ;
-            }
-        }
-
-    }
-   /* public void addLine (City c , City c2)
-    {
-        this.getChildren().add(new Line(c.getX(),c.getY()
-                                        ,c2.getX() , c2.getY())) ;
-
-    }*/
-    public Pane getPane()
-    {
-        return this ;
-    }
-}
-
-
