@@ -1,4 +1,7 @@
+import javafx.collections.transformation.SortedList;
+
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 
 public class City {
@@ -21,7 +24,7 @@ public class City {
     private int x ,y ;
 
    private ArrayList <City> neighbor = new ArrayList<>() ;
-   private ArrayList <Integer> distance  = new ArrayList<>() ;
+   private ArrayList <Double > distance  = new ArrayList<>() ;
    private ArrayList <Double> realistic   = new ArrayList<>() ;
 
     public City(String name) {
@@ -35,6 +38,40 @@ public class City {
         this.y = y;
 
     }
+
+    public void sortCityBasedDistance ()
+    {
+        ArrayList <Double > temp   = getRealistic() ;
+        ArrayList <City > tempCity   =  new ArrayList<>() ;
+        Collections.sort(realistic);
+
+
+
+
+        int [] cityIndexes = new int[neighbor.size()];
+        int i = 0 ;
+        for(Double d : realistic)
+        {
+            cityIndexes[i] = realistic.indexOf(d) ;
+            System.out.println("dd  "+cityIndexes[i]);
+            i++;
+        }
+        i=0 ;
+
+        for (City c :neighbor
+             ) {
+          //  System.out.println(i);
+            tempCity.add( cityIndexes[i], c);
+            i++;
+        }
+        neighbor.clear();
+        for (City c: tempCity
+             ) {
+            this.neighbor.add(c);
+        }
+
+    }
+
 
     public ArrayList<Double > getRealistic() {
         return realistic;
@@ -52,11 +89,17 @@ public class City {
         this.y = y;
     }
 
+    public ArrayList<Double> getDistance() {
+        return distance;
+    }
+
     public void  addNeighbor(City c ){
 
-        int d = (int)(Math.sqrt( Math.pow( (Math.abs(x-c.x)), 2 ) -  Math.pow( Math.abs(y-c.y), 2 ))) ;
+        double d = (Math.sqrt( Math.pow( (Math.abs(x-c.x)), 2 ) -  Math.pow( Math.abs(y-c.y), 2 ))) ;
         neighbor.add(c);
         distance.add(d);
+
+
     }
 
     public void dispalyN ()

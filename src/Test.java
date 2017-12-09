@@ -36,8 +36,9 @@ public class Test {
     }
     public void addNeighborPrepared (City p , City c   , double realistic  )
     {
-        p.getNeighbor().add(c);
-        c.getNeighbor().add(p) ;
+
+        p.addNeighbor(c);
+        c.addNeighbor(p);
         p.getRealistic().add(realistic) ;
         c.getRealistic().add(realistic) ;
 
@@ -49,6 +50,15 @@ public class Test {
                 return  c ;
         }
         return  null ;
+    }
+
+    public void prepareAllDistance ()
+    {
+
+        for (City c :data
+             ) {
+            c.sortCityBasedDistance();
+        }
     }
     public void getPreparedData (){
 
@@ -88,6 +98,7 @@ public class Test {
         for (City c  : data ) {
             cityNames.add(c.name);
         }
+
 
         //return data ;
 

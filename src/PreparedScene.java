@@ -32,10 +32,21 @@ public class PreparedScene {
     public  Scene initSecne ( Scene homeScene){
         // Scene custemSc ;
         String[] algonames = new String[]{ "Draw", "BFS" , "DFS" , "Greedy", "A*"} ;
-        String[] cityNames  =new String[]{ "Sadat", "Ashmoun" , "Bajour" , "Menouf", "Sers",
-                                            "Shohada" ,"Tala","Shebin","Quesna","Berkat elsan3" } ;
+      //  String[] cityNames  =new String[]{ "Sadat", "Ashmoun" , "Bajour" , "Menouf", "Sers",
+                        //                    "Shohada" ,"Tala","Shebin","Quesna","Berkat elsan3" } ;
 
         t.getPreparedData(); //intial  data set
+        System.out.println( t.getData().get(0).getRealistic().get(0));
+        t.getData().get(0).sortCityBasedDistance();
+        System.out.println( t.getData().get(0).getRealistic().get(0));
+        //t.prepareAllDistance();
+        System.out.println(t.getData().get(0).name);
+        for (City d : t.getData().get(0).getNeighbor()
+             ) {
+            System.out.println(d.name);
+        }
+
+
         //root pane
         VBox p =  new VBox (25);
         p.setPadding(new Insets(15));
@@ -47,7 +58,7 @@ public class PreparedScene {
         //neibour
 
         ObservableList<String> cname = FXCollections.
-                observableArrayList(cityNames) ;
+                observableArrayList(t.cityNames) ;
 
         ObservableList<String> obAlnames = FXCollections.
                 observableArrayList(algonames) ;
@@ -72,6 +83,7 @@ public class PreparedScene {
             City  cStart = t.getCity(c1) ;
             City  cEnd = t.getCity(c2) ;
 
+
             System.out.println(cStart);
             System.out.println(cEnd);
             System.out.println("satart " + cStart.name);
@@ -87,49 +99,57 @@ public class PreparedScene {
             cp.setPane(t.getData());
             drawPane.getChildren().add(cp.getPane()); //by this i draw shapes
 
-            Pane visted = null;
-            if (c3 == "BFS") {
-                BridthFirst b = new BridthFirst();
-                b.BFS_search(cStart, cEnd);
-                //select path or traverse
-                System.out.println(tg.selectedToggleProperty().toString());
-                if (tg.selectedToggleProperty().toString().contains("Path"))
-                    visted = getPath(b.queue) ;
-                else
-                    visted = getPath(b.visited) ;
+
+                Pane visted = null;
+                if (c3 == "BFS") {
+                    BridthFirst b = new BridthFirst();
+                    b.BFS_search(cStart, cEnd);
+                    //select path or traverse
+                    System.out.println(tg.selectedToggleProperty().toString());
+                    if (tg.selectedToggleProperty().toString().contains("Path"))
+                        visted = getPath(b.queue);
+                    else
+                        visted = getPath(b.visited);
 
 
-                drawPane.getChildren().add(visted );
-            }
-            else if (c3 == "DFS")
-            {
-                DepthFirst d = new DepthFirst();
-                d.DFS_search(cStart, cEnd);
-                //select path or traverse
-                System.out.println(tg.selectedToggleProperty().toString());
-                if (tg.selectedToggleProperty().toString().contains("Path"))
-                    visted = getPath(d.path) ;
-                else
-                    visted = getPath(d.visited) ;
+                    drawPane.getChildren().add(visted);
+                } else if (c3 == "DFS") {
+                    DepthFirst d = new DepthFirst();
+                    d.DFS_search(cStart, cEnd);
+                    //select path or traverse
+                    System.out.println(tg.selectedToggleProperty().toString());
+                    if (tg.selectedToggleProperty().toString().contains("Path"))
+                        visted = getPath(d.path);
+                    else
+                        visted = getPath(d.visited);
 
 
-                drawPane.getChildren().add(visted );
-
-            }
-            else if (c3 == "Greedy")
-            {
 
 
-            }
-            else if (c3 =="A*")
-            {
+                } else if (c3 == "Greedy") {
+                    Greedy b = new Greedy();
+                    b.Greedy_search(cStart, cEnd);
+                    System.out.println(b.path.size());
+                    //select path or traverse
+                    System.out.println(tg.selectedToggleProperty().toString());
+                    if (tg.selectedToggleProperty().toString().contains("Path")) {
+                        visted = getPath(b.path);
+                        System.out.println("Ya Allah");
+                    } else
+                        visted = getPath(b.visited);
 
 
-            }
+                } else if (c3 == "A*") {
 
+
+                }
+
+            drawPane.getChildren().add(visted);
 
             drawPane.setOnMousePressed((MouseEvent h) ->{
+                if (drawPane.getChildren().size() > 1 )
                 drawPane.getChildren().remove(1);
+                drawStage.close();
             });
 
             hroot.getChildren().add(drawPane) ;

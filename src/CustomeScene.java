@@ -88,6 +88,7 @@ public class CustomeScene {
 
         drawPath.setOnAction((ActionEvent e) ->{
 
+           // t.prepareAllDistance();//sortAllDistance
             String c1 = comSource.getValue() ;
             String c2 = comDestina.getValue() ;
             String c3 = comAlo.getValue() ;
