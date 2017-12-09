@@ -229,8 +229,9 @@ public class CustomeScene {
         animation.setNode(cpath);
         animation.setPath(p) ;
         animation.play();
+        animation.setRate(0.1);
         animation.setCycleCount(2);
-        animation.setDuration(Duration.seconds(5));
+        animation.setDuration(Duration.seconds(50));
 
         pn.getChildren().addAll(cpath) ;
 

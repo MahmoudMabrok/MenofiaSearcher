@@ -181,9 +181,10 @@ public class PreparedScene {
         PathTransition animation = new PathTransition() ;
         animation.setNode(cpath);
         animation.setPath(p) ;
+        animation.setRate(0.1);
         animation.play();
         animation.setCycleCount(2);
-        animation.setDuration(Duration.seconds(5));
+        animation.setDuration(Duration.seconds(50));
 
         pn.getChildren().addAll(cpath) ;
 
