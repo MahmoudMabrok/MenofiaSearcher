@@ -52,28 +52,30 @@ public class City {
             tempCity.add(d);
         }
 
+/*
 
         System.out.println("tt" + tempCity.size() );
         System.out.println( "first nei  " + tempCity.get(0).name);
         System.out.println("first in ne before " + this.neighbor.get(0).name );
 
         System.out.println("");
+*/
 
         int minIndex  = 0 ;
 
         neighbor.clear();
-        System.out.println( "ne size" + neighbor.size());
-        System.out.println( "Temp  size" + tempCity.size());
+       /* System.out.println( "ne size" + neighbor.size());
+        System.out.println( "Temp  size" + tempCity.size());*/
         for (City c: tempCity
              ) {
             minIndex = realistic.indexOf((Double) Collections.min(temp)) ;
-            System.out.println("minIndex  " + minIndex  );
+           // System.out.println("minIndex  " + minIndex  );
             temp.remove((Double) Collections.min(temp)) ;
             neighbor.add(tempCity.get((int)minIndex))  ;
-            System.out.println("sss nn " + neighbor.size());
+            //System.out.println("sss nn " + neighbor.size());
 
         }
-        System.out.println("first in ne after  " + neighbor.get(0).name);
+       // System.out.println("first in ne after  " + neighbor.get(0).name);
 
          Collections.sort(realistic);
 
