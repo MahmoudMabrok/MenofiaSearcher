@@ -1,6 +1,8 @@
-import java.util.ArrayList;
-import java.util.Collections;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
 
 
 public class City {
@@ -25,6 +27,7 @@ public class City {
    private ArrayList <City> neighbor = new ArrayList<>() ;
    private ArrayList <Double > distance  = new ArrayList<>() ;
    private ArrayList <Double> realistic   = new ArrayList<>() ;
+   private ArrayList <Double > heuristic    = new ArrayList<>() ;
 
     public City(String name) {
         this.name = name;
@@ -37,7 +40,7 @@ public class City {
         this.y = y;
 
     }
-    public   void  setDistToGoal (City goal )
+   /* public   void  setDistToGoal (City goal )
     {
         double d ;
         this.distance.clear();
@@ -47,6 +50,29 @@ public class City {
         }
         sortCityBasedDistance();
 
+    }*/
+    public   void  setDistToGoal ()
+    {
+        double d ;
+        this.distance.clear();
+        for (City c : neighbor ){
+            d = (Math.sqrt( Math.pow( (Math.abs(x-c.x)), 2 ) +  Math.pow( Math.abs(y-c.y), 2 ))) ;
+            distance.add(d);
+        }
+
+    }
+
+    public ArrayList<Double> getHeuristic() {
+        return heuristic;
+    }
+
+    public void setHeuristic (City goal ){
+
+        List<String> cities = Arrays.asList(Data.cities);
+
+        for(City c : neighbor ){
+            heuristic.add( Data.hs[cities.indexOf(c.name)][cities.indexOf(goal.name)]);
+        }
     }
 
     public void sortCityBasedDistance ()
@@ -62,19 +88,10 @@ public class City {
             tempCity.add(d);
         }
 
-/*
-        System.out.println("tt" + tempCity.size() );
-        System.out.println( "first nei  " + tempCity.get(0).name);
-        System.out.println("first in ne before " + this.neighbor.get(0).name );
-
-        System.out.println("");*/
-
         int minIndex  = 0 ;
 
         neighbor.clear();
-       /* System.out.println( "ne size" + neighbor.size());
-        System.out.println( "Temp  size" + tempCity.size());*/
-        for (City c: tempCity
+       for (City c: tempCity
              ) {
             minIndex = distance.indexOf((Double) Collections.min(temp)) ;
            // System.out.println("minIndex  " + minIndex  );
@@ -127,4 +144,6 @@ public class City {
             System.out.println("\t\t"+ e.name + "  dis is  " );
         }
     }
+
+
 }

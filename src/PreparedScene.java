@@ -116,11 +116,14 @@ public class PreparedScene {
                     else
                         visted = getPath(d.visited);
 
-
-
-
                 } else if (c3 == "Greedy") {
-                    t.prepareAllDistance(cEnd);
+
+                 //   t.prepareAllDistance(cEnd);
+                    t.getData().get(0).setHeuristic(cEnd);
+                    for (double c:t.getData().get(0).getHeuristic()
+                         ) {
+                        System.out.println("bbb  "+c);
+                    }
                     for (City c : t.getData().get(0).getNeighbor()){
                         System.out.println("t " + c.name );
                     }

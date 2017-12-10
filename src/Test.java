@@ -2,6 +2,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableArray;
 import javafx.collections.ObservableList;
 import javafx.scene.Node;
+
 import javafx.scene.control.Label;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
@@ -14,6 +15,8 @@ import java.awt.geom.Point2D;
 import java.util.ArrayList;
 
 public class Test {
+
+
     public  ArrayList<String> cityNames = new ArrayList<>() ;
 
   private    ArrayList<City> data  = new ArrayList<>() ;
@@ -56,7 +59,7 @@ public class Test {
      * used to compute all distance to goal
      * then sort neighbour based on this distance
      */
-
+/*
     public void prepareAllDistance (City goal )
     {
 
@@ -65,7 +68,7 @@ public class Test {
             c.setDistToGoal(goal );
         }
     }
-
+*/
     public void getPreparedData (){
 
         City Sadat = new City( 62,405,"Sadat");

@@ -28,7 +28,8 @@ public class Home extends Application {
         ImageView imUniverId = new ImageView(new Image("uni_ar.png"));
         Button bCustome = new Button("Custom Seracher ") ;
         Button bPrepared = new Button("Prepared Seracher ") ;
-        root.getChildren().addAll(imUniverId,bCustome ,bPrepared) ;
+        Button bAbout = new Button("About") ;
+        root.getChildren().addAll(imUniverId,bCustome ,bPrepared,bAbout) ;
         homeScene = new Scene(root);
 
         //UI actions
@@ -40,11 +41,15 @@ public class Home extends Application {
             PreparedScene ps = new PreparedScene() ;
             primaryStage.setScene(ps.initSecne(homeScene));
         });
+        bAbout.setOnAction(e->{
+            About a = new About() ;
+        });
 
         primaryStage.setScene(homeScene );
         primaryStage.setResizable(false);
         primaryStage.setTitle("MenoufiaSeracher");
         primaryStage.show();
+
 
     }
 }
