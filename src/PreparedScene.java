@@ -36,15 +36,8 @@ public class PreparedScene {
                         //                    "Shohada" ,"Tala","Shebin","Quesna","Berkat elsan3" } ;
 
         t.getPreparedData(); //intial  data set
-        System.out.println( t.getData().get(0).getRealistic().get(0));
-        t.getData().get(0).sortCityBasedDistance();
-        System.out.println( t.getData().get(0).getRealistic().get(0));
-        //t.prepareAllDistance();
-        System.out.println(t.getData().get(0).name);
-        for (City d : t.getData().get(0).getNeighbor()
-             ) {
-            System.out.println(d.name);
-        }
+
+
 
 
         //root pane

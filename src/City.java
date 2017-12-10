@@ -1,8 +1,7 @@
-import javafx.collections.transformation.SortedList;
-
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.HashMap;
+
+
 
 public class City {
 
@@ -41,34 +40,42 @@ public class City {
 
     public void sortCityBasedDistance ()
     {
-        ArrayList <Double > temp   = getRealistic() ;
-        ArrayList <City > tempCity   =  new ArrayList<>() ;
-        Collections.sort(realistic);
-
-
-
-
-        int [] cityIndexes = new int[neighbor.size()];
-        int i = 0 ;
-        for(Double d : realistic)
-        {
-            cityIndexes[i] = realistic.indexOf(d) ;
-            System.out.println("dd  "+cityIndexes[i]);
-            i++;
-        }
-        i=0 ;
-
-        for (City c :neighbor
+        System.out.println( " name is "  + name );
+        ArrayList <Double > temp   =new ArrayList<>() ;
+        for (Double d : realistic
              ) {
-          //  System.out.println(i);
-            tempCity.add( cityIndexes[i], c);
-            i++;
+            temp.add(d);
         }
+        ArrayList <City > tempCity   =  new ArrayList<>() ;
+        for (City d : neighbor
+                ) {
+            tempCity.add(d);
+        }
+
+
+        System.out.println("tt" + tempCity.size() );
+        System.out.println( "first nei  " + tempCity.get(0).name);
+        System.out.println("first in ne before " + this.neighbor.get(0).name );
+
+        System.out.println("");
+
+        int minIndex  = 0 ;
+
         neighbor.clear();
+        System.out.println( "ne size" + neighbor.size());
+        System.out.println( "Temp  size" + tempCity.size());
         for (City c: tempCity
              ) {
-            this.neighbor.add(c);
+            minIndex = realistic.indexOf((Double) Collections.min(temp)) ;
+            System.out.println("minIndex  " + minIndex  );
+            temp.remove((Double) Collections.min(temp)) ;
+            neighbor.add(tempCity.get((int)minIndex))  ;
+            System.out.println("sss nn " + neighbor.size());
+
         }
+        System.out.println("first in ne after  " + neighbor.get(0).name);
+
+         Collections.sort(realistic);
 
     }
 

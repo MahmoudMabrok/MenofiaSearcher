@@ -62,7 +62,7 @@ public class Test {
     }
     public void getPreparedData (){
 
-        City Sadat = new City( 32,405,"Sadat");
+        City Sadat = new City( 62,405,"Sadat");
         City Ashmoun = new City(460,457,"Ashmoun");
         City Bajour = new City(509,327,"Bajour");
         City Menouf = new City(419,285,"Menouf");
@@ -99,7 +99,7 @@ public class Test {
             cityNames.add(c.name);
         }
 
-
+        prepareAllDistance();
         //return data ;
 
     }
