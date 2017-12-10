@@ -116,15 +116,23 @@ public class CustomeScene {
                 //select path or traverse
                 System.out.println(tg.selectedToggleProperty().toString());
                 if (tg.selectedToggleProperty().toString().contains("Path"))
-                    visted = getPath(b.queue) ;
+                    visted = getPath(b.visited) ;
                 else
                     visted = getPath(b.visited) ;
 
 
-                drawPane.getChildren().add(visted );
+
             }
             else if (c3 == "DFS")
             {
+                DepthFirst d = new DepthFirst();
+                d.DFS_search(cStart, cEnd);
+                //select path or traverse
+                System.out.println(tg.selectedToggleProperty().toString());
+                if (tg.selectedToggleProperty().toString().contains("Path"))
+                    visted = getPath(d.path);
+                else
+                    visted = getPath(d.visited);
 
 
             }
@@ -138,10 +146,11 @@ public class CustomeScene {
 
 
             }
-
-
+            if (visted != null )
+                drawPane.getChildren().add(visted );
             drawPane.setOnMousePressed((MouseEvent h) ->{
                 drawPane.getChildren().remove(1);
+                drawStage.close();
             });
 
             hroot.getChildren().add(drawPane) ;

@@ -120,6 +120,10 @@ public class PreparedScene {
 
 
                 } else if (c3 == "Greedy") {
+                    t.prepareAllDistance(cEnd);
+                    for (City c : t.getData().get(0).getNeighbor()){
+                        System.out.println("t " + c.name );
+                    }
                     Greedy b = new Greedy();
                     b.Greedy_search(cStart, cEnd);
                     System.out.println(b.path.size());

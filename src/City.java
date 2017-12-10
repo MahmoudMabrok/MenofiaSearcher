@@ -37,12 +37,22 @@ public class City {
         this.y = y;
 
     }
+    public   void  setDistToGoal (City goal )
+    {
+        double d ;
+        this.distance.clear();
+        for (City c : neighbor ){
+            d = (Math.sqrt( Math.pow( (Math.abs(goal.x-c.x)), 2 ) +  Math.pow( Math.abs(goal.y-c.y), 2 ))) ;
+            distance.add(d);
+        }
+        sortCityBasedDistance();
+
+    }
 
     public void sortCityBasedDistance ()
     {
-        System.out.println( " name is "  + name );
         ArrayList <Double > temp   =new ArrayList<>() ;
-        for (Double d : realistic
+        for (Double d : distance
              ) {
             temp.add(d);
         }
@@ -53,13 +63,11 @@ public class City {
         }
 
 /*
-
         System.out.println("tt" + tempCity.size() );
         System.out.println( "first nei  " + tempCity.get(0).name);
         System.out.println("first in ne before " + this.neighbor.get(0).name );
 
-        System.out.println("");
-*/
+        System.out.println("");*/
 
         int minIndex  = 0 ;
 
@@ -68,7 +76,7 @@ public class City {
         System.out.println( "Temp  size" + tempCity.size());*/
         for (City c: tempCity
              ) {
-            minIndex = realistic.indexOf((Double) Collections.min(temp)) ;
+            minIndex = distance.indexOf((Double) Collections.min(temp)) ;
            // System.out.println("minIndex  " + minIndex  );
             temp.remove((Double) Collections.min(temp)) ;
             neighbor.add(tempCity.get((int)minIndex))  ;
@@ -77,7 +85,7 @@ public class City {
         }
        // System.out.println("first in ne after  " + neighbor.get(0).name);
 
-         Collections.sort(realistic);
+         Collections.sort(distance);
 
     }
 
@@ -104,9 +112,9 @@ public class City {
 
     public void  addNeighbor(City c ){
 
-        double d = (Math.sqrt( Math.pow( (Math.abs(x-c.x)), 2 ) -  Math.pow( Math.abs(y-c.y), 2 ))) ;
+      //  double d = (Math.sqrt( Math.pow( (Math.abs(x-c.x)), 2 ) -  Math.pow( Math.abs(y-c.y), 2 ))) ;
         neighbor.add(c);
-        distance.add(d);
+       //  distance.add(d);
 
 
     }

@@ -15,7 +15,7 @@ public class Greedy {
     ArrayList<City> visited = new ArrayList();
     ArrayList<City> path = new ArrayList();
     boolean flag = false;
-    
+
     public  void Greedy_search(City initial,City goal){
         visited.add(initial);
         path.add(initial);

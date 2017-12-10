@@ -52,14 +52,20 @@ public class Test {
         return  null ;
     }
 
-    public void prepareAllDistance ()
+    /**
+     * used to compute all distance to goal
+     * then sort neighbour based on this distance
+     */
+
+    public void prepareAllDistance (City goal )
     {
 
         for (City c :data
              ) {
-            c.sortCityBasedDistance();
+            c.setDistToGoal(goal );
         }
     }
+
     public void getPreparedData (){
 
         City Sadat = new City( 62,405,"Sadat");
@@ -99,7 +105,7 @@ public class Test {
             cityNames.add(c.name);
         }
 
-        prepareAllDistance();
+       // prepareAllDistance(); called to set Distance
         //return data ;
 
     }
