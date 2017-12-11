@@ -10,7 +10,6 @@ public class City {
     String name ;
     private int x ,y ;
     private ArrayList<City> neighbor = new ArrayList<>();
-    private ArrayList<Double> distance = new ArrayList<>();
     private ArrayList<Double> heuristic = new ArrayList<>();
 
     public City(String name) {
@@ -38,11 +37,6 @@ public class City {
     public ArrayList<Double> getHeuristic() {
         return heuristic;
     }
-
-    public ArrayList<Double> getDistance() {
-        return distance;
-    }
-
 
     public static double getDistanceBetCity(City start, City goal) {
         return (Math.sqrt(Math.pow((Math.abs(start.x - goal.x)), 2) + Math.pow(Math.abs(start.y - goal.y), 2)));
@@ -117,12 +111,7 @@ public class City {
 
 
     public void  addNeighbor(City c ){
-
-      //  double d = (Math.sqrt( Math.pow( (Math.abs(x-c.x)), 2 ) -  Math.pow( Math.abs(y-c.y), 2 ))) ;
         neighbor.add(c);
-       //  distance.add(d);
-
-
     }
 
     public void dispalyN ()

@@ -6,13 +6,18 @@ import javafx.stage.Stage;
 
 public class About {
     public About() {
-        Pane root = new Pane() ;
-        Stage aboutStage = new Stage() ;
+
+        Pane root = new Pane();
+        Stage aboutStage = new Stage();
     ImageView aboutImage = new ImageView(new Image("About2.png"));
     root.getChildren().add(aboutImage) ;
+        root.setOnMousePressed(e -> {
+            aboutStage.close();
+        });
+
     Scene sc = new Scene(root) ;
     aboutStage.setScene(sc);
     aboutStage.setTitle("About App.");
-    aboutStage.showAndWait();
+        aboutStage.show();
     }
 }

@@ -33,41 +33,65 @@ public class PreparedScene {
     public void initSecne() {
         // Scene prepScene ;
         String[] algonames = new String[]{ "Draw", "BFS" , "DFS" , "Greedy", "A*"} ;
-      //  String[] cityNames  =new String[]{ "Sadat", "Ashmoun" , "Bajour" , "Menouf", "Sers",
-                        //                    "Shohada" ,"Tala","Shebin","Quesna","Berkat elsan3" } ;
 
         t.prepareData(); //intial  data set
 
-
-
-
         //root pane
-        VBox p =  new VBox (25);
+        VBox p = new VBox(15);
         p.setPadding(new Insets(15));
         p.setAlignment(Pos.CENTER);
 
-
-
-
         //neibour
-
         ObservableList<String> cname = FXCollections.
+                observableArrayList(t.cityNames);
+
+        ObservableList<String> tempNames = FXCollections.
                 observableArrayList(t.cityNames) ;
 
         ObservableList<String> obAlnames = FXCollections.
                 observableArrayList(algonames) ;
 
         ComboBox<String> comSource  = new ComboBox<String>(cname) ;
+        comSource.setValue("Sadat");
         ComboBox<String> comDestina  = new ComboBox<>(cname) ;
+        comDestina.setValue("Tala");
         ComboBox<String> comAlo  = new ComboBox<String>(obAlnames) ;
+        comAlo.setValue("Draw");
+
+        Button drawPath = new Button("drawPath ");
 
         ToggleGroup tg = new ToggleGroup() ;
         RadioButton rPath = new RadioButton("Path") ;
         rPath.setToggleGroup(tg);
+        rPath.setSelected(true);
         RadioButton rTraverse = new RadioButton("Traverse") ;
         rTraverse.setToggleGroup(tg);
 
-        Button drawPath  = new Button("drawPath ") ;
+        HBox explainPane = new HBox(55);
+        Label ls = new Label("Select Source");
+        Label ld = new Label("Select Goal   ");
+        Label la = new Label("Select algorithm");
+        explainPane.getChildren().addAll(ls, ld, la);
+        p.getChildren().add(explainPane);
+
+        comDestina.valueProperty().addListener(e -> {
+            if (comDestina.getValue().equals(comSource.getValue()))
+                drawPath.setDisable(true);
+            else
+                drawPath.setDisable(false);
+
+
+        });
+
+        comSource.valueProperty().addListener(e -> {
+            if (comSource.getValue().equals(comDestina.getValue()))
+                drawPath.setDisable(true);
+            else
+                drawPath.setDisable(false);
+
+
+        });
+
 
         drawPath.setOnAction((ActionEvent e) ->{
 
@@ -76,7 +100,6 @@ public class PreparedScene {
             String c3 = comAlo.getValue() ;
             City  cStart = t.getCity(c1) ;
             City  cEnd = t.getCity(c2) ;
-
 
             System.out.println(cStart);
             System.out.println(cEnd);
@@ -88,6 +111,7 @@ public class PreparedScene {
             hroot.setAlignment(Pos.CENTER);
             Pane drawPane = new Pane();
 
+
             drawPane.getChildren().clear();
             drawPane.setPadding(new Insets(50));
             cp.setPane(t.getData());
@@ -96,7 +120,6 @@ public class PreparedScene {
             Label lAlert = new Label("");
             lAlert.setFont(Font.font(24));
             lAlert.setStyle("-fx-fill:green");
-
 
             Pane visted = null;
                 if (c3 == "BFS") {
@@ -108,8 +131,6 @@ public class PreparedScene {
                         visted = getPath(b.visited);
                     else
                         visted = getPath(b.visited);
-
-
 
                 } else if (c3 == "DFS") {
                     DepthFirst d = new DepthFirst();
@@ -152,8 +173,7 @@ public class PreparedScene {
                     System.out.println("i called getPrepared");
                     t.prepareData();//return data to its initial state
                 } else if (c3 == "A*") {
-
-
+                    visted = null;
                 }
 
             if (visted != null) {
@@ -170,8 +190,8 @@ public class PreparedScene {
             drawStage.setScene(new Scene(hroot));
             drawStage.setTitle("Path from " + c1 + " to " + c2);
             drawStage.showAndWait();
-        });
 
+        });
 
         HBox selectAlgo  = new HBox(10);
         selectAlgo.setAlignment(Pos.CENTER);
@@ -195,7 +215,6 @@ public class PreparedScene {
         Polyline p = new Polyline() ;
         ObservableList<Double> points = p.getPoints() ;
 
-
         for (City c :data
                 ) {
             points.add( Double.valueOf( c.getX()) ) ;
@@ -205,7 +224,6 @@ public class PreparedScene {
         Circle cpath = new Circle() ;
         cpath.setRadius(15);
         cpath.setFill(Color.BLUE);
-
 
         PathTransition animation = new PathTransition() ;
         animation.setNode(cpath);

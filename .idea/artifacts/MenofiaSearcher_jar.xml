@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="MenofiaSearcher:jar">
+    <output-path>$PROJECT_DIR$/out/artifacts/MenofiaSearcher_jar</output-path>
+    <root id="archive" name="MenofiaSearcher.jar">
+      <element id="module-output" name="MenofiaSearcher" />
+    </root>
+  </artifact>
+</component>
