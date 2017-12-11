@@ -24,9 +24,9 @@ public class Greedy {
             return;
         }
         if(flag == false){
-            if( ! visited.contains(initial.getNeighbor().get(0) ))
+            if (!visited.contains(initial.getNeighbor().get(0)))
                 Greedy_search(initial.getNeighbor().get(0), goal);
-            else if(initial.getNeighbor().size() > 1)
+            else if (initial.getNeighbor().size() > 1 && (!visited.contains(initial.getNeighbor().get(1))))
                 Greedy_search(initial.getNeighbor().get(1), goal);
         }
     }

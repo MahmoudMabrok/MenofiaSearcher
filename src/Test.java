@@ -13,6 +13,8 @@ import javafx.scene.text.Font;
 
 import java.awt.geom.Point2D;
 import java.util.ArrayList;
+import java.util.Queue;
+import java.util.Stack;
 
 public class Test {
 
@@ -59,18 +61,18 @@ public class Test {
      * used to compute all distance to goal
      * then sort neighbour based on this distance
      */
-/*
-    public void prepareAllDistance (City goal )
+
+    public void prepareHeuristic(City goal)
     {
 
         for (City c :data
              ) {
-            c.setDistToGoal(goal );
+            c.setHeuristic(goal);
         }
     }
-*/
-    public void getPreparedData (){
 
+    public void prepareData() {
+        data.clear();//
         City Sadat = new City( 62,405,"Sadat");
         City Ashmoun = new City(460,457,"Ashmoun");
         City Bajour = new City(509,327,"Bajour");
@@ -108,7 +110,7 @@ public class Test {
             cityNames.add(c.name);
         }
 
-       // prepareAllDistance(); called to set Distance
+        // prepareAllDistance(); called to set Distance
         //return data ;
 
     }
@@ -151,6 +153,7 @@ class circlePane extends Pane {
                 getChildren().add(ln) ;
             }
         }
+
 
     }
 

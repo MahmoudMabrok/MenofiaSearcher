@@ -40,25 +40,10 @@ public class City {
         this.y = y;
 
     }
-   /* public   void  setDistToGoal (City goal )
-    {
-        double d ;
-        this.distance.clear();
-        for (City c : neighbor ){
-            d = (Math.sqrt( Math.pow( (Math.abs(goal.x-c.x)), 2 ) +  Math.pow( Math.abs(goal.y-c.y), 2 ))) ;
-            distance.add(d);
-        }
-        sortCityBasedDistance();
 
-    }*/
-    public   void  setDistToGoal ()
-    {
-        double d ;
-        this.distance.clear();
-        for (City c : neighbor ){
-            d = (Math.sqrt( Math.pow( (Math.abs(x-c.x)), 2 ) +  Math.pow( Math.abs(y-c.y), 2 ))) ;
-            distance.add(d);
-        }
+
+    public static double getDistanceBetCity(City start, City goal) {
+        return (Math.sqrt(Math.pow((Math.abs(start.x - goal.x)), 2) + Math.pow(Math.abs(start.y - goal.y), 2)));
 
     }
 
@@ -66,22 +51,46 @@ public class City {
         return heuristic;
     }
 
-    public void setHeuristic (City goal ){
-
-        List<String> cities = Arrays.asList(Data.cities);
-
-        for(City c : neighbor ){
-            heuristic.add( Data.hs[cities.indexOf(c.name)][cities.indexOf(goal.name)]);
+    /**
+     * compute heuristic to all neighbor to goal
+     *
+     * @param goal
+     */
+    public void setHeuristic (City goal) {
+        List<String> cities = Arrays.asList(DataSet.cities);
+        System.out.println("n of neighbour " + neighbor.size());
+        for(City c : neighbor) {
+            heuristic.add(DataSet.hs[cities.indexOf(c.name)][cities.indexOf(goal.name)]);
         }
+        System.out.println("n h for  " + name + "   " + heuristic.size());
+        System.out.println("heuristic for " + name + " is  " + heuristic);
+        System.out.println("neghbour for " + name + " is " + neighbor);
+        sortCityBasedHeuristic();
+        System.out.println("after sort heuristic for " + name + " is  " + heuristic);
+        System.out.println("neghbour after sort for " + name + " is " + neighbor  );
     }
 
-    public void sortCityBasedDistance ()
+    /**
+     * compute heuristic between two cities
+     *
+     * @param start
+     * @param goal
+     * @return heuristic value from dataSet
+     */
+    public static double getHeuristicBetCity(City start, City goal) {
+        List<String> cities = Arrays.asList(DataSet.cities);
+        return (DataSet.hs[cities.indexOf(start.name)][cities.indexOf(goal.name)]);
+    }
+
+    public void sortCityBasedHeuristic  ()
     {
-        ArrayList <Double > temp   =new ArrayList<>() ;
-        for (Double d : distance
+        ArrayList <Double > temp   =new ArrayList<>();
+
+        for (Double d : heuristic
              ) {
             temp.add(d);
         }
+
         ArrayList <City > tempCity   =  new ArrayList<>() ;
         for (City d : neighbor
                 ) {
@@ -92,8 +101,9 @@ public class City {
 
         neighbor.clear();
        for (City c: tempCity
-             ) {
-            minIndex = distance.indexOf((Double) Collections.min(temp)) ;
+               ) {
+           minIndex = heuristic.indexOf((Double) Collections.min(temp));
+           System.out.println("index  " + minIndex);
            // System.out.println("minIndex  " + minIndex  );
             temp.remove((Double) Collections.min(temp)) ;
             neighbor.add(tempCity.get((int)minIndex))  ;
@@ -102,7 +112,7 @@ public class City {
         }
        // System.out.println("first in ne after  " + neighbor.get(0).name);
 
-         Collections.sort(distance);
+        Collections.sort(heuristic);
 
     }
 

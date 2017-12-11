@@ -1,4 +1,4 @@
-public class Data {
+public class DataSet {
 
     static  String [] cities = {"Tala",
             "Shohada",

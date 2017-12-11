@@ -35,7 +35,7 @@ public class PreparedScene {
       //  String[] cityNames  =new String[]{ "Sadat", "Ashmoun" , "Bajour" , "Menouf", "Sers",
                         //                    "Shohada" ,"Tala","Shebin","Quesna","Berkat elsan3" } ;
 
-        t.getPreparedData(); //intial  data set
+        t.prepareData(); //intial  data set
 
 
 
@@ -118,15 +118,16 @@ public class PreparedScene {
 
                 } else if (c3 == "Greedy") {
 
-                 //   t.prepareAllDistance(cEnd);
-                    t.getData().get(0).setHeuristic(cEnd);
+                    t.prepareHeuristic(cEnd);
+                    //t.getData().get(0).setHeuristic(cEnd);
                     for (double c:t.getData().get(0).getHeuristic()
                          ) {
-                        System.out.println("bbb  "+c);
+                        System.out.println("bbb sadat " + c);
                     }
                     for (City c : t.getData().get(0).getNeighbor()){
                         System.out.println("t " + c.name );
                     }
+
                     Greedy b = new Greedy();
                     b.Greedy_search(cStart, cEnd);
                     System.out.println(b.path.size());
@@ -138,7 +139,8 @@ public class PreparedScene {
                     } else
                         visted = getPath(b.visited);
 
-
+                    System.out.println("i called getPrepared");
+                    t.prepareData();//return data to its initial state
                 } else if (c3 == "A*") {
 
 
