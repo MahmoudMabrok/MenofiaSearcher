@@ -22,16 +22,17 @@ import java.util.ArrayList;
 import java.util.InputMismatchException;
 
 public class CustomeScene {
+
     Test t = new Test() ;
     ArrayList <String> aloNames = new ArrayList<>() ;
     Stage drawStage = new Stage() ;
     circlePane cp = new circlePane() ;
     Scene custemSc ;
-    boolean isHome = false ;
+    Stage custStage = new Stage();
 
 
-    public  Scene initSecne ( Scene homeScene){
-       // Scene custemSc ;
+    public void initSecne() {
+
         String[] algonames = new String[]{ "Draw", "BFS" , "DFS" , "Greedy", "A*"} ;
 
         //root pane
@@ -44,7 +45,7 @@ public class CustomeScene {
         TextField CityName = new TextField () ;
         TextField cityX = new TextField () ;
         TextField cityY = new TextField () ;
-        TextField cityRealistic = new TextField ("0") ;
+        //TextField cityRealistic = new TextField ("0") ;
 
         CityName.setPromptText("name of city ");
         cityX.setPromptText("x of city");
@@ -147,7 +148,6 @@ public class CustomeScene {
             else if (c3 == "Greedy")
             {
                 t.prepareHeuristic(cEnd);
-                //t.getData().get(0).setHeuristic(cEnd);
                 for (double c : t.getData().get(0).getHeuristic()
                         ) {
                     System.out.println("bbb sadat " + c);
@@ -200,7 +200,7 @@ public class CustomeScene {
 
         HBox addRelPane = new HBox(10);
         addRelPane.setAlignment(Pos.CENTER);
-        addRelPane.getChildren().addAll(comSource , comDestina ,cityRealistic ,addRelation  ) ;
+        addRelPane.getChildren().addAll(comSource, comDestina, addRelation);
 
         HBox selectAlgo  = new HBox(10);
         selectAlgo.setAlignment(Pos.CENTER);
@@ -214,14 +214,11 @@ public class CustomeScene {
         addRelation.setOnAction(e->{
             if (comSource.getValue() != "" && comDestina.getValue() != "" &&
                     comSource.getValue() !=comDestina.getValue()) {
-                Double realistic = Double.parseDouble(cityRealistic.getText()) ;
-                t.addNeighbor(t.getCity(comSource.getValue()),
-                        t.getCity(comDestina.getValue()) ,
-                        realistic );
-                t.addNeighbor(t.getCity(comDestina.getValue()),
-                        t.getCity(comSource.getValue()) ,
-                        realistic);
 
+                t.addNeighbor(t.getCity(comSource.getValue()),
+                        t.getCity(comDestina.getValue()));
+                t.addNeighbor(t.getCity(comDestina.getValue()),
+                        t.getCity(comSource.getValue()));
             }
             t.getCity(comSource.getValue()).dispalyN();
         });
@@ -244,13 +241,12 @@ public class CustomeScene {
         });*/
 
         returnHome.setOnAction(e->{
-            isHome  = true ;
+            custStage.close();
         });
+        custStage.setScene(custemSc);
+        custStage.setTitle("Custom Data");
+        custStage.show();
 
-        if (!isHome)
-        return  custemSc ;
-        else
-            return  homeScene ;
     }
 
     public  static Pane getPath (ArrayList<City> data){

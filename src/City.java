@@ -8,13 +8,22 @@ import java.util.List;
 public class City {
 
     String name ;
+    private int x ,y ;
+    private ArrayList<City> neighbor = new ArrayList<>();
+    private ArrayList<Double> distance = new ArrayList<>();
+    private ArrayList<Double> heuristic = new ArrayList<>();
 
-    public ArrayList<City> getNeighbor() {
-        return neighbor;
+    public City(String name) {
+        this.name = name;
+    }
+
+    public City(int x, int y, String name) {
+        this(name);
+        this.x = x;
+        this.y = y;
     }
 
     public int getX() {
-
         return x;
     }
 
@@ -22,33 +31,21 @@ public class City {
         return y;
     }
 
-    private int x ,y ;
-
-   private ArrayList <City> neighbor = new ArrayList<>() ;
-   private ArrayList <Double > distance  = new ArrayList<>() ;
-   private ArrayList <Double> realistic   = new ArrayList<>() ;
-   private ArrayList <Double > heuristic    = new ArrayList<>() ;
-
-    public City(String name) {
-        this.name = name;
+    public ArrayList<City> getNeighbor() {
+        return neighbor;
     }
 
+    public ArrayList<Double> getHeuristic() {
+        return heuristic;
+    }
 
-    public City(int x, int y , String name) {
-        this(name) ;
-        this.x = x;
-        this.y = y;
-
+    public ArrayList<Double> getDistance() {
+        return distance;
     }
 
 
     public static double getDistanceBetCity(City start, City goal) {
         return (Math.sqrt(Math.pow((Math.abs(start.x - goal.x)), 2) + Math.pow(Math.abs(start.y - goal.y), 2)));
-
-    }
-
-    public ArrayList<Double> getHeuristic() {
-        return heuristic;
     }
 
     /**
@@ -69,7 +66,6 @@ public class City {
         System.out.println("after sort heuristic for " + name + " is  " + heuristic);
         System.out.println("neghbour after sort for " + name + " is " + neighbor  );
     }
-
     /**
      * compute heuristic between two cities
      *
@@ -85,20 +81,16 @@ public class City {
     public void sortCityBasedHeuristic  ()
     {
         ArrayList <Double > temp   =new ArrayList<>();
-
         for (Double d : heuristic
              ) {
             temp.add(d);
         }
-
         ArrayList <City > tempCity   =  new ArrayList<>() ;
         for (City d : neighbor
                 ) {
             tempCity.add(d);
         }
-
         int minIndex  = 0 ;
-
         neighbor.clear();
        for (City c: tempCity
                ) {
@@ -108,34 +100,21 @@ public class City {
             temp.remove((Double) Collections.min(temp)) ;
             neighbor.add(tempCity.get((int)minIndex))  ;
             //System.out.println("sss nn " + neighbor.size());
-
         }
        // System.out.println("first in ne after  " + neighbor.get(0).name);
-
         Collections.sort(heuristic);
-
-    }
-
-
-    public ArrayList<Double > getRealistic() {
-        return realistic;
     }
 
     public void setName(String name) {
         this.name = name;
     }
-
     public void setX(int x) {
         this.x = x;
     }
-
     public void setY(int y) {
         this.y = y;
     }
 
-    public ArrayList<Double> getDistance() {
-        return distance;
-    }
 
     public void  addNeighbor(City c ){
 

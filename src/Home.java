@@ -35,11 +35,11 @@ public class Home extends Application {
         //UI actions
         bCustome.setOnAction((ActionEvent e) ->{
             CustomeScene cs = new CustomeScene();
-            primaryStage.setScene(cs.initSecne(homeScene));
+            cs.initSecne();
         });
         bPrepared.setOnAction(e->{
             PreparedScene ps = new PreparedScene() ;
-            primaryStage.setScene(ps.initSecne(homeScene));
+            ps.initSecne();
         });
         bAbout.setOnAction(e->{
             About a = new About() ;

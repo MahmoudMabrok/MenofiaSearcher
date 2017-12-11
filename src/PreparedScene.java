@@ -26,12 +26,12 @@ public class PreparedScene {
     Test t = new Test() ;
     Stage drawStage = new Stage() ;
     circlePane cp = new circlePane() ;
-    Scene custemSc ;
-    boolean isHome = false ;
+    Scene prepScene;
+    Stage preparedStage = new Stage();
 
 
-    public  Scene initSecne ( Scene homeScene){
-        // Scene custemSc ;
+    public void initSecne() {
+        // Scene prepScene ;
         String[] algonames = new String[]{ "Draw", "BFS" , "DFS" , "Greedy", "A*"} ;
       //  String[] cityNames  =new String[]{ "Sadat", "Ashmoun" , "Bajour" , "Menouf", "Sers",
                         //                    "Shohada" ,"Tala","Shebin","Quesna","Berkat elsan3" } ;
@@ -179,20 +179,15 @@ public class PreparedScene {
 
         Button returnHome = new Button("returnHome") ;
         p.getChildren().addAll( selectAlgo , returnHome  ) ;
-
-        custemSc = new Scene(p);
-
-        //clear feature
-
+        prepScene = new Scene(p);
 
         returnHome.setOnAction(e->{
-            isHome  = true ;
+            preparedStage.close();
         });
 
-        if (!isHome)
-            return  custemSc ;
-        else
-            return  homeScene ;
+        preparedStage.setScene(prepScene);
+        preparedStage.setTitle("Prepared Data");
+        preparedStage.show();
     }
 
     public  static Pane getPath (ArrayList<City> data){

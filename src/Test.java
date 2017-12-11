@@ -33,19 +33,18 @@ public class Test {
 
     }
 
-    public void addNeighbor (City p , City c   , double realistic  )
+    public void addNeighbor(City p, City c)
     {
         p.getNeighbor().add(c);
-        p.getRealistic().add(realistic) ;
+
 
     }
-    public void addNeighborPrepared (City p , City c   , double realistic  )
+
+    public void addNeighborPrepared(City p, City c)
     {
 
         p.addNeighbor(c);
         c.addNeighbor(p);
-        p.getRealistic().add(realistic) ;
-        c.getRealistic().add(realistic) ;
 
     }
     public City getCity (String name ){
@@ -84,16 +83,16 @@ public class Test {
         City Quesna = new City(600,315,"Quesna");
         City Berkat_elsan3 = new City(560,120,"Berkat elsan3");
 
-        addNeighborPrepared( Sadat,Ashmoun ,  75) ;
-        addNeighborPrepared( Sadat,Menouf ,  57.7) ;
-        addNeighborPrepared( Menouf,Sers ,  7.2) ;
-        addNeighborPrepared( Menouf,Shohada ,  22.8) ;
-        addNeighborPrepared( Sers,Bajour ,  8.3) ;
-        addNeighborPrepared( Menouf,Shebin ,  17.9) ;
-        addNeighborPrepared( Tala,Shebin ,  16.3) ;
-        addNeighborPrepared( Shebin,Quesna ,  18.3) ;
-        addNeighborPrepared( Shebin,Berkat_elsan3 ,  14.3) ;
-        addNeighborPrepared( Quesna,Berkat_elsan3 ,  17.1) ;
+        addNeighborPrepared(Sadat, Ashmoun);
+        addNeighborPrepared(Sadat, Menouf);
+        addNeighborPrepared(Menouf, Sers);
+        addNeighborPrepared(Menouf, Shohada);
+        addNeighborPrepared(Sers, Bajour);
+        addNeighborPrepared(Menouf, Shebin);
+        addNeighborPrepared(Tala, Shebin);
+        addNeighborPrepared(Shebin, Quesna);
+        addNeighborPrepared(Shebin, Berkat_elsan3);
+        addNeighborPrepared(Quesna, Berkat_elsan3);
 
         data.add(Sadat) ;
         data.add(Menouf) ;
