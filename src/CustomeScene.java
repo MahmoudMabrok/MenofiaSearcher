@@ -14,6 +14,7 @@ import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.Polyline;
+import javafx.scene.text.Font;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 
@@ -109,6 +110,11 @@ public class CustomeScene {
             cp.setPane(t.getData());
             drawPane.getChildren().add(cp.getPane()); //by this i draw shapes
 
+            //Alert Label
+            Label lAlert = new Label("");
+            lAlert.setFont(Font.font(24));
+            lAlert.setStyle("-fx-fill:green");
+
             Pane visted = null;
             if (c3 == "BFS") {
                 BridthFirst b = new BridthFirst();
@@ -129,18 +135,47 @@ public class CustomeScene {
                 d.DFS_search(cStart, cEnd);
                 //select path or traverse
                 System.out.println(tg.selectedToggleProperty().toString());
-                if (tg.selectedToggleProperty().toString().contains("Path"))
+                if (tg.selectedToggleProperty().toString().contains("Path")) {
                     visted = getPath(d.path);
-                else
+                    lAlert.setText("Path " + d.path);
+                } else {
                     visted = getPath(d.visited);
-
+                    lAlert.setText("Road " + d.visited);
+                }
 
             }
             else if (c3 == "Greedy")
             {
+                t.prepareHeuristic(cEnd);
+                //t.getData().get(0).setHeuristic(cEnd);
+                for (double c : t.getData().get(0).getHeuristic()
+                        ) {
+                    System.out.println("bbb sadat " + c);
+                }
+                for (City c : t.getData().get(0).getNeighbor()) {
+                    System.out.println("t " + c.name);
+                }
 
+                Greedy b = new Greedy();
+                b.Greedy_search(cStart, cEnd);
+                System.out.println(b.path.size());
+                //select path or traverse
+                System.out.println(tg.selectedToggleProperty().toString());
+                if (tg.selectedToggleProperty().toString().contains("Path")) {
+                    visted = getPath(b.path);
+                    System.out.println("Ya Allah");
+                } else
+                    visted = getPath(b.visited);
 
-            }
+                if (b.path.get(b.path.size() - 1) != cEnd) {
+                    lAlert.setText("As u know Greedy is greedy\n so not complete");
+                } else {
+                    lAlert.setText("from your luck greedy find path ");
+                }
+                System.out.println("i called getPrepared");
+                t.prepareData();//return data to its initial state
+
+            } //end greedy
             else if (c3 =="A*")
             {
 
@@ -148,7 +183,7 @@ public class CustomeScene {
             }
             if (visted != null )
                 drawPane.getChildren().add(visted );
-            drawPane.setOnMousePressed((MouseEvent h) ->{
+            drawPane.setOnMousePressed((MouseEvent h) -> {
                 drawPane.getChildren().remove(1);
                 drawStage.close();
             });

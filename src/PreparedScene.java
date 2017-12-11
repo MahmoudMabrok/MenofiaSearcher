@@ -13,6 +13,7 @@ import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.Polyline;
+import javafx.scene.text.Font;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 
@@ -92,8 +93,12 @@ public class PreparedScene {
             cp.setPane(t.getData());
             drawPane.getChildren().add(cp.getPane()); //by this i draw shapes
 
+            Label lAlert = new Label("");
+            lAlert.setFont(Font.font(24));
+            lAlert.setStyle("-fx-fill:green");
 
-                Pane visted = null;
+
+            Pane visted = null;
                 if (c3 == "BFS") {
                     BridthFirst b = new BridthFirst();
                     b.BFS_search(cStart, cEnd);
@@ -139,6 +144,11 @@ public class PreparedScene {
                     } else
                         visted = getPath(b.visited);
 
+                    if (b.path.get(b.path.size() - 1) != cEnd) {
+                        lAlert.setText("As u know Greedy is greedy\n so not complete");
+                    } else {
+                        lAlert.setText("from your luck greedy find path ");
+                    }
                     System.out.println("i called getPrepared");
                     t.prepareData();//return data to its initial state
                 } else if (c3 == "A*") {
@@ -146,9 +156,10 @@ public class PreparedScene {
 
                 }
 
-                if(visted != null )
-            drawPane.getChildren().add(visted);
-
+            if (visted != null) {
+                drawPane.getChildren().add(lAlert);
+                drawPane.getChildren().add(visted);
+            }
             drawPane.setOnMousePressed((MouseEvent h) ->{
                 if (drawPane.getChildren().size() > 1 )
                 drawPane.getChildren().remove(1);
@@ -158,7 +169,7 @@ public class PreparedScene {
             hroot.getChildren().add(drawPane) ;
             drawStage.setScene(new Scene(hroot));
             drawStage.setTitle("Path from " + c1 + " to " + c2);
-            drawStage.show();
+            drawStage.showAndWait();
         });
 
 
