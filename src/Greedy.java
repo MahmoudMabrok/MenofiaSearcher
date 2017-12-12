@@ -18,6 +18,7 @@ public class Greedy {
 
     public  void Greedy_search(City initial,City goal){
         visited.add(initial);
+        System.out.println(initial.name);
         path.add(initial);
         if(initial == goal){
             flag = true;

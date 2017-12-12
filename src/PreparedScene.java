@@ -89,7 +89,6 @@ public class PreparedScene {
             else
                 drawPath.setDisable(false);
 
-
         });
 
 
@@ -119,7 +118,7 @@ public class PreparedScene {
 
             Label lAlert = new Label("");
             lAlert.setFont(Font.font(24));
-            lAlert.setStyle("-fx-fill:green");
+            lAlert.setStyle("-fx-text-color:green");
 
             Pane visted = null;
                 if (c3 == "BFS") {

@@ -82,6 +82,13 @@ public class Test {
         City Shebin = new City(480,200,"Shebin");
         City Quesna = new City(600,315,"Quesna");
         City Berkat_elsan3 = new City(560,120,"Berkat elsan3");
+       /* City rlnoubaria = new City(33,33,"ElNoubaria");
+        City Dalangate = new City(560,120,"Dalangate");*/
+        City banha = new City(610, 450, "Banha");
+      /*  City Berkat_elsan3 = new City(560,120,"Berkat elsan3");
+        City Berkat_elsan3 = new City(560,120,"Berkat elsan3");
+        City Berkat_elsan3 = new City(560,120,"Berkat elsan3");*/
+        Font.font(15);
 
         addNeighborPrepared(Sadat, Ashmoun);
         addNeighborPrepared(Sadat, Menouf);
@@ -90,9 +97,19 @@ public class Test {
         addNeighborPrepared(Sers, Bajour);
         addNeighborPrepared(Menouf, Shebin);
         addNeighborPrepared(Tala, Shebin);
+        addNeighborPrepared(Shohada, Shebin);
+        addNeighborPrepared(Tala, Shohada);
+        addNeighborPrepared(Tala, Berkat_elsan3);
         addNeighborPrepared(Shebin, Quesna);
+        addNeighborPrepared(Bajour, Shebin);
+        addNeighborPrepared(Bajour, Quesna);
         addNeighborPrepared(Shebin, Berkat_elsan3);
         addNeighborPrepared(Quesna, Berkat_elsan3);
+
+
+        addNeighborPrepared(banha, Shebin);
+        addNeighborPrepared(banha, Bajour);
+        addNeighborPrepared(banha, Quesna);
 
         data.add(Sadat) ;
         data.add(Menouf) ;
@@ -104,6 +121,7 @@ public class Test {
         data.add(Quesna) ;
         data.add(Bajour) ;
         data.add(Berkat_elsan3) ;
+        data.add(banha);
 
         for (City c  : data ) {
             cityNames.add(c.name);
