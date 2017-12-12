@@ -112,7 +112,7 @@ public class PreparedScene {
 
 
             drawPane.getChildren().clear();
-            drawPane.setPadding(new Insets(50));
+            drawPane.setPadding(new Insets(15));
             cp.setPane(t.getData());
             drawPane.getChildren().add(cp.getPane()); //by this i draw shapes
 

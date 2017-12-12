@@ -79,12 +79,17 @@ public class Test {
         City Sers = new City(405,304,"Sers");
         City Shohada = new City(400,150,"Shohada");
         City Tala = new City(435,55,"Tala");
+        City Tanta = new City(460, 20, "Tanta");
+        City MahalaQubra = new City(500, 5, "MahalaQubra");
         City Shebin = new City(480,200,"Shebin");
         City Quesna = new City(600,315,"Quesna");
         City Berkat_elsan3 = new City(560,120,"Berkat elsan3");
        /* City rlnoubaria = new City(33,33,"ElNoubaria");
         City Dalangate = new City(560,120,"Dalangate");*/
         City banha = new City(610, 450, "Banha");
+        City Zagazig = new City(700, 450, "Zagazig");
+        City ShebinQnatar = new City(750, 520, "ShebinQnatar");
+
       /*  City Berkat_elsan3 = new City(560,120,"Berkat elsan3");
         City Berkat_elsan3 = new City(560,120,"Berkat elsan3");
         City Berkat_elsan3 = new City(560,120,"Berkat elsan3");*/
@@ -106,10 +111,23 @@ public class Test {
         addNeighborPrepared(Shebin, Berkat_elsan3);
         addNeighborPrepared(Quesna, Berkat_elsan3);
 
-
         addNeighborPrepared(banha, Shebin);
         addNeighborPrepared(banha, Bajour);
         addNeighborPrepared(banha, Quesna);
+
+        addNeighborPrepared(banha, Zagazig);
+
+        addNeighborPrepared(ShebinQnatar, Zagazig);
+        addNeighborPrepared(ShebinQnatar, banha);
+
+        addNeighborPrepared(Tanta, Tala);
+        addNeighborPrepared(Tanta, Shebin);
+        addNeighborPrepared(Tanta, Quesna);
+        addNeighborPrepared(Tanta, Berkat_elsan3);
+
+        addNeighborPrepared(Tanta, MahalaQubra);
+
+
 
         data.add(Sadat) ;
         data.add(Menouf) ;
@@ -122,6 +140,10 @@ public class Test {
         data.add(Bajour) ;
         data.add(Berkat_elsan3) ;
         data.add(banha);
+        data.add(Zagazig);
+        data.add(ShebinQnatar);
+        data.add(Tanta);
+        data.add(MahalaQubra);
 
         for (City c  : data ) {
             cityNames.add(c.name);
