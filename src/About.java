@@ -6,11 +6,10 @@ import javafx.stage.Stage;
 
 public class About {
     public About() {
-
         Pane root = new Pane();
         Stage aboutStage = new Stage();
-    ImageView aboutImage = new ImageView(new Image("About2.png"));
-    root.getChildren().add(aboutImage) ;
+        ImageView aboutImage = new ImageView(new Image("About2.png"));
+        root.getChildren().add(aboutImage);
         root.setOnMousePressed(e -> {
             aboutStage.close();
         });
@@ -18,6 +17,7 @@ public class About {
     Scene sc = new Scene(root) ;
     aboutStage.setScene(sc);
     aboutStage.setTitle("About App.");
+        aboutStage.setResizable(false);
         aboutStage.show();
     }
 }

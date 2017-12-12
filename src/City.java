@@ -38,13 +38,20 @@ public class City {
         return heuristic;
     }
 
+    /**
+     * compute distance
+     *
+     * @param start
+     * @param goal
+     * @return distance
+     */
     public static double getDistanceBetCity(City start, City goal) {
         return (Math.sqrt(Math.pow((Math.abs(start.x - goal.x)), 2) + Math.pow(Math.abs(start.y - goal.y), 2)));
     }
 
     /**
      * compute heuristic to all neighbor to goal
-     *
+     *then re-arrange neighbour based on  heuristic
      * @param goal
      */
     public void setHeuristic (City goal) {
@@ -72,11 +79,13 @@ public class City {
         return (DataSet.hs[cities.indexOf(start.name)][cities.indexOf(goal.name)]);
     }
 
-    public void sortCityBasedHeuristic  ()
-    {
+    /**
+     * sort neighbor based on heuristic
+     */
+    public void sortCityBasedHeuristic  () {
         ArrayList <Double > temp   =new ArrayList<>();
         for (Double d : heuristic
-             ) {
+                ) {
             temp.add(d);
         }
         ArrayList <City > tempCity   =  new ArrayList<>() ;
@@ -86,16 +95,16 @@ public class City {
         }
         int minIndex  = 0 ;
         neighbor.clear();
-       for (City c: tempCity
-               ) {
-           minIndex = heuristic.indexOf((Double) Collections.min(temp));
-           System.out.println("index  " + minIndex);
-           // System.out.println("minIndex  " + minIndex  );
+        for (City c: tempCity
+                ) {
+            minIndex = heuristic.indexOf((Double) Collections.min(temp));
+            System.out.println("index  " + minIndex);
+            // System.out.println("minIndex  " + minIndex  );
             temp.remove((Double) Collections.min(temp)) ;
             neighbor.add(tempCity.get((int)minIndex))  ;
             //System.out.println("sss nn " + neighbor.size());
         }
-       // System.out.println("first in ne after  " + neighbor.get(0).name);
+        // System.out.println("first in ne after  " + neighbor.get(0).name);
         Collections.sort(heuristic);
     }
 
@@ -109,14 +118,18 @@ public class City {
         this.y = y;
     }
 
-
+    /**
+     * add neighbor
+     * @param c  neighbor city to add
+     */
     public void  addNeighbor(City c ){
         neighbor.add(c);
     }
 
-    public void dispalyN ()
-    {
-
+    /**
+     * display  neighbor of this city
+     */
+    public void dispalyN () {
         System.out.println(name + " --> ");
         for (City e:neighbor) {
             System.out.println("\t\t"+ e.name + "  dis is  " );

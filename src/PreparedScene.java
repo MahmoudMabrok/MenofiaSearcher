@@ -128,7 +128,7 @@ public class PreparedScene {
                     //select path or traverse
                     System.out.println(tg.selectedToggleProperty().toString());
                     if (tg.selectedToggleProperty().toString().contains("Path"))
-                        visted = getPath(b.visited);
+                        visted = getPath(b.path);
                     else
                         visted = getPath(b.visited);
 
@@ -173,7 +173,17 @@ public class PreparedScene {
                     System.out.println("i called getPrepared");
                     t.prepareData();//return data to its initial state
                 } else if (c3 == "A*") {
-                    visted = null;
+
+                    A_Star b = new A_Star();
+                    b.A_Search(cStart, cEnd);
+
+                    System.out.println(tg.selectedToggleProperty().toString());
+                    if (tg.selectedToggleProperty().toString().contains("Path")) {
+                        visted = getPath(b.path);
+                        System.out.println("Ya Allah");
+                    } else
+                        visted = getPath(b.path);
+
                 }
 
             if (visted != null) {
@@ -230,8 +240,8 @@ public class PreparedScene {
         animation.setPath(p) ;
         animation.setRate(0.1);
         animation.play();
-        animation.setCycleCount(2);
-        animation.setDuration(Duration.seconds(50));
+        animation.setCycleCount(1);
+        animation.setDuration(Duration.seconds(10));
 
         pn.getChildren().addAll(cpath) ;
 
