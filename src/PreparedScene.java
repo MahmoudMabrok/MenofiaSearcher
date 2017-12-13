@@ -143,16 +143,6 @@ public class PreparedScene {
 
                 } else if (c3 == "Greedy") {
 
-                    t.prepareHeuristic(cEnd);
-                    //t.getData().get(0).setHeuristic(cEnd);
-                    for (double c:t.getData().get(0).getHeuristic()
-                         ) {
-                        System.out.println("bbb sadat " + c);
-                    }
-                    for (City c : t.getData().get(0).getNeighbor()){
-                        System.out.println("t " + c.name );
-                    }
-
                     Greedy b = new Greedy();
                     b.Greedy_search(cStart, cEnd);
                     System.out.println(b.path.size());
@@ -170,7 +160,7 @@ public class PreparedScene {
                         lAlert.setText("from your luck greedy find path ");
                     }
                     System.out.println("i called getPrepared");
-                    t.prepareData();//return data to its initial state
+                    // t.prepareData();//return data to its initial state
                 } else if (c3 == "A*") {
 
                     A_Star b = new A_Star();

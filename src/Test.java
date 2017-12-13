@@ -6,9 +6,7 @@ import javafx.scene.Node;
 import javafx.scene.control.Label;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
-import javafx.scene.shape.Circle;
-import javafx.scene.shape.Line;
-import javafx.scene.shape.Polyline;
+import javafx.scene.shape.*;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontPosture;
@@ -192,13 +190,18 @@ class circlePane extends Pane {
         }
         int startx ,starty ;
         Line ln = null  ;
+        QuadCurve q = null;
         for (City c :cl){
 
             startx = c.getX() ;
             starty = c.getY() ;
             for(City cn : c.getNeighbor())
             {
+                int cx = (int) (Math.abs(startx - cn.getX())) / 2;
+                int cy = (int) (Math.abs(starty - cn.getY())) / 2;
                 ln = new Line( startx,starty,cn.getX(),cn.getY()) ;
+                // q = new QuadCurve ( startx,starty,cx ,cy, cn.getX(),cn.getY()) ;
+                // q.setStroke(Color.WHITE);
                 ln.setStroke(Color.GREEN);
                 getChildren().add(ln) ;
             }
