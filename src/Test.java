@@ -9,8 +9,12 @@ import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.Line;
 import javafx.scene.shape.Polyline;
+import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Font;
+import javafx.scene.text.FontPosture;
+import javafx.scene.text.FontWeight;
 
+import java.awt.*;
 import java.awt.geom.Point2D;
 import java.util.ArrayList;
 import java.util.Queue;
@@ -170,17 +174,23 @@ class circlePane extends Pane {
         Label l ;
 
         for (City c  : cl ) {
-            this.getChildren().add(new Circle(c.getX(), c.getY(), 10));
-
+            Circle cr = new Circle(c.getX(), c.getY(), 5);
+            cr.setFill(Color.GREEN);
+            if (DataSet.capital_list.contains(c.name)) {
+                Rectangle rg = new Rectangle(c.getX() - 5, c.getY() - 5, 10, 10);
+                rg.setFill(Color.BLUE);
+                this.getChildren().add(rg);
+            } else {
+                this.getChildren().add(cr);
+            }
             l=new Label(c.name) ;
-            l.setLayoutX(c.getX());
-            l.setLayoutY(c.getY() );
+            l.setFont(Font.font(c.name, FontWeight.BOLD, 18));
+            l.setLayoutX(c.getX() - 15);
+            l.setLayoutY(c.getY() - 25);
             l.setTextFill(Color.RED);
-            l.setFont(Font.font(25));
             this.getChildren().add(l);
         }
         int startx ,starty ;
-        int endx,endy ;
         Line ln = null  ;
         for (City c :cl){
 
@@ -189,6 +199,7 @@ class circlePane extends Pane {
             for(City cn : c.getNeighbor())
             {
                 ln = new Line( startx,starty,cn.getX(),cn.getY()) ;
+                ln.setStroke(Color.GREEN);
                 getChildren().add(ln) ;
             }
         }

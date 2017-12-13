@@ -194,7 +194,7 @@ public class PreparedScene {
                 drawPane.getChildren().remove(1);
                 drawStage.close();
             });
-
+            // hroot.setStyle("-fx-background-color:yellow");
             hroot.getChildren().add(drawPane) ;
             drawStage.setScene(new Scene(hroot));
             drawStage.setTitle("Path from " + c1 + " to " + c2);
@@ -231,8 +231,8 @@ public class PreparedScene {
         }
 
         Circle cpath = new Circle() ;
-        cpath.setRadius(15);
-        cpath.setFill(Color.BLUE);
+        cpath.setRadius(10);
+        cpath.setFill(Color.BLUEVIOLET);
 
         PathTransition animation = new PathTransition() ;
         animation.setNode(cpath);

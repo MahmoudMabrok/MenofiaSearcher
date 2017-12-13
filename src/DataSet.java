@@ -1,9 +1,15 @@
+import java.util.Arrays;
+import java.util.List;
+
 public class DataSet {
 
     static String[] cities = {
             "Tala", "Shohada", "Berkat elsan3", "Quesna", "Shebin", "Menouf", "Sers", "Bajour",
             "Ashmoun", "Sadat", "Banha", "Zagazig", "ShebinQnatar", "Tanta", "MahalaQubra"
     };
+
+    static List<String> capital_list = Arrays.asList(new String[]{"Shebin",
+            "Tanta", "Zagazig"});
     static double[][] hs = {
             {0, 13.7, 19.7, 32.8, 16.3, 32, 31.5, 31.9, 56.5, 77.5, 1000, 1000, 1000, 12.7, 1000},
             {13.7, 0, 28.9, 30.8, 14.3, 22.8, 27.1, 30.7, 41.6, 78.9, 1000, 1000, 1000, 1000, 1000},
