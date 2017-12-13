@@ -17,7 +17,7 @@ public class About {
     public About() {
         Pane root = new Pane();
         Stage aboutStage = new Stage();
-        ImageView aboutImage = new ImageView(new Image("About2.png"));
+        ImageView aboutImage = new ImageView(new Image("About3.png"));
 
         System.out.println(aboutImage.getX() + " " + aboutImage.getY());
         root.setOnMousePressed(e -> {
