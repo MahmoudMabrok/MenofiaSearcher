@@ -47,6 +47,7 @@ public class Home extends Application {
 
         primaryStage.setScene(homeScene );
         primaryStage.setResizable(false);
+        primaryStage.getIcons().add(new Image("icon1.png")) ;
         primaryStage.setTitle("MenoufiaSeracher");
         primaryStage.show();
 

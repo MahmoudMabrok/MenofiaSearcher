@@ -6,6 +6,7 @@ import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.image.Image;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
@@ -188,6 +189,7 @@ public class PreparedScene {
             hroot.getChildren().add(drawPane) ;
             drawStage.setScene(new Scene(hroot));
             drawStage.setTitle("Path from " + c1 + " to " + c2);
+            drawStage.getIcons().add(new Image("icon1.png")) ;
             drawStage.showAndWait();
 
         });
@@ -206,6 +208,7 @@ public class PreparedScene {
 
         preparedStage.setScene(prepScene);
         preparedStage.setTitle("Prepared Data");
+        preparedStage.getIcons().add(new Image ("icon1.png")) ;
         preparedStage.show();
     }
 

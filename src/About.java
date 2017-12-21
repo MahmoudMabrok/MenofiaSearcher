@@ -12,17 +12,15 @@ import java.net.URISyntaxException;
 import java.net.URL;
 import java.net.URLConnection;
 
+
 public class About {
     Desktop desktop = Desktop.getDesktop();
     public About() {
         Pane root = new Pane();
         Stage aboutStage = new Stage();
         ImageView aboutImage = new ImageView(new Image("About3.png"));
-
-        System.out.println(aboutImage.getX() + " " + aboutImage.getY());
         root.setOnMousePressed(e -> {
             aboutStage.close();
-            System.out.println(e.getX() + "  mm " + e.getY());
         });
         Button sourceCode = new Button("Open GitHub");
         sourceCode.setLayoutX(208);
@@ -31,7 +29,10 @@ public class About {
             try {
                 URL gitLink = new URL("https://github.com/MahmoudMabrok/MenofiaSearcher");
                 if (Desktop.isDesktopSupported()) {
-                    desktop.browse(gitLink.toURI());
+                    if (desktop.isSupported(Desktop.Action.BROWSE) )
+                        desktop.browse(gitLink.toURI());
+                    else
+                        Runtime.getRuntime().exec("xdg-open " +gitLink.toURI() );
                 }
 
             } catch (URISyntaxException ux) {
@@ -46,8 +47,10 @@ public class About {
         root.getChildren().addAll(aboutImage, sourceCode);
     Scene sc = new Scene(root) ;
     aboutStage.setScene(sc);
+    aboutStage.getIcons().add(new Image("if_Help_1493288.png")) ;
     aboutStage.setTitle("About App.");
-        aboutStage.setResizable(false);
-        aboutStage.show();
+    aboutStage.setResizable(false);
+    aboutStage.show();
+
     }
 }

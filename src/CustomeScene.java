@@ -6,6 +6,7 @@ import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.image.Image;
 import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
@@ -191,6 +192,7 @@ public class CustomeScene {
             hroot.getChildren().add(drawPane) ;
             drawStage.setScene(new Scene(hroot));
             drawStage.setTitle("Path from " + c1 + " to " + c2);
+            drawStage.getIcons().add(new Image("icon1.png")) ;
             drawStage.show();
         });
 
@@ -245,6 +247,7 @@ public class CustomeScene {
         });
         custStage.setScene(custemSc);
         custStage.setTitle("Custom Data");
+        custStage.getIcons().add(new Image ("icon1.png")) ;
         custStage.show();
 
     }
