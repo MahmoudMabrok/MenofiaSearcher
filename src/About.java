@@ -6,7 +6,7 @@ import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 
 import java.awt.*;
-import java.io.IOException;
+import java.io.*;
 import java.net.MalformedURLException;
 import java.net.URISyntaxException;
 import java.net.URL;
@@ -32,7 +32,41 @@ public class About {
                     if (desktop.isSupported(Desktop.Action.BROWSE) )
                         desktop.browse(gitLink.toURI());
                     else
-                        Runtime.getRuntime().exec("xdg-open " +gitLink.toURI() );
+                    {
+
+                        String s = System.getProperty("os.name").toLowerCase();
+                        if (s.contains("linux"))
+                        {
+
+                            String msg ;
+                        //    Process p = Runtime.getRuntime().exec("cat /proc/version") ;
+                            Process p = Runtime.getRuntime().exec("pgrep -l \"gnome|kde|mate|cinnamon\"") ;
+                            BufferedReader br = new BufferedReader(
+                                    new InputStreamReader(p.getInputStream()));
+                            msg = br.readLine() ;
+                            if (msg.contains("kde")){
+                                Runtime.getRuntime().exec("kde-open  " +gitLink.toString() );
+                            }
+                            else if (msg.contains("gnome"))
+                            {
+                                Runtime.getRuntime().exec("gnome-open  " +gitLink.toString() );
+                            }else
+                            {
+                                Runtime.getRuntime().exec("xdg-open  " +gitLink.toString() );
+
+                            }
+                            p.destroy();
+
+                            System.out.println(gitLink);
+                          //  Runtime.getRuntime().exec("xdg-open  " +gitLink.toString() );
+
+                            //Runtime.getRuntime().exec("gnome-open  " +gitLink.toString() );
+
+                        }
+
+                    }
+
+
                 }
 
             } catch (URISyntaxException ux) {
